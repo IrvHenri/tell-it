@@ -25,19 +25,18 @@ module.exports = (db) => {
       });
   });
 
-  // router.post("/", (req, res) => {
-  //   let user_id = req.session;
-  //   let query = `'INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2)`;
-  //   let values = [1];
-  //   db.query(query)
-  //     .then((data) => {
-  //       console.log(data);
-  //       const stories = data.rows;
-  //       res.json({ stories });
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // });
+  router.post("/", (req, res) => {
+    let query = `'INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2)`;
+    let values = [1];
+    db.query(query)
+      .then((data) => {
+        console.log(data);
+        const stories = data.rows;
+        res.json({ stories });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
   return router;
 };
