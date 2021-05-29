@@ -19,7 +19,14 @@ module.exports = (db) => {
     db.query(`
     SELECT * FROM users WHERE id = $1;
     `,[req.params.id])
-    .then(data => res.json(data.rows[0]))
+    .then(data => {
+      const user = data.rows[0]
+      if(user){
+        res.json(user)
+      } else {
+        res.status(400).json("Error. User does not exist!")
+      }
+    })
     .catch(err => {
       res
         .status(500)
@@ -33,7 +40,14 @@ module.exports = (db) => {
     JOIN users ON user_id = users.id
     WHERE user_id = $1;
     `,[req.params.id])
-    .then(data => res.json(data.rows))
+    .then(data => {
+      const stories = data.rows
+      if(stories.length > 1) {
+        res.json(stories)
+      } else {
+        res.status(400).json("Disply something different if user has no stories.")
+      }
+    })
     .catch(err => {
       res
         .status(500)
