@@ -57,7 +57,12 @@ app.use("/stories", storiesRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  res.redirect("/stories");
+});
+
+app.get("/login/:id", (req, res) => {
+  req.session.user_id = req.params.id;
+  res.redirect("/stories");
 });
 
 app.listen(PORT, () => {
