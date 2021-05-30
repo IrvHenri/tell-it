@@ -29,17 +29,6 @@ module.exports = (db) => {
   //Route for Getting both the story, and it's associated contributions
   router.get('/:storyId', (req, res) => {
     const retObj = {};
-    // db.query(`
-    //   SELECT stories.*,
-    //   contributions.user_id as contributor_id,
-    //   contributions.content as contribution_content,
-    //   contributions.created_at as contribution_created_at,
-    //   contributions.is_accepted
-    //   FROM stories
-    //   JOIN contributions ON story_id = stories.id
-    //   WHERE stories.id = $1;
-    // `,[req.params.storyId])
-    // .then(data => res.json(data.rows))
     db.query(
       `
       SELECT stories.* FROM stories WHERE id = $1;
