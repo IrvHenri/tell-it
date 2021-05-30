@@ -42,11 +42,7 @@ module.exports = (db) => {
     `,[req.params.id])
     .then(data => {
       const stories = data.rows
-      if(stories.length > 1) {
-        res.json({stories})
-      } else {
-        res.status(400).json("Disply something different if user has no stories.")
-      }
+      res.json({stories})
     })
     .catch(err => {
       res

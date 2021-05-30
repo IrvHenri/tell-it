@@ -14,10 +14,16 @@ $(() => {
       .then((data) => {
         let stories = data.stories;
         //If user doesn't have stories, render something else
-        renderStories(stories, "#user-stories");
+        if(stories.length === 0){
+          $("#user-stories").prepend(`
+          <div>
+            <h1>Uh Oh</h1>
+            <h2>This user has no stories!</h2>
+          </div>`)
+        } else {
+          renderStories(stories, "#user-stories");
+        }
       })
       .catch((err) => console.log(err));
   };
-
-  // //loadHomePage();
 });
