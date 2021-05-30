@@ -25,6 +25,10 @@ $(() => {
   const renderStories = (stories) => {
     stories.forEach((story) => {
       $("#home").prepend(createStory(story));
+      //Event listener for 'view more stories'
+      $('.story-article footer button').on('click', function() {
+        console.log(story);
+      })
     });
   };
 
