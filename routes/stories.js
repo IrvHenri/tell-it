@@ -16,7 +16,6 @@ module.exports = (db) => {
     JOIN users ON stories.user_id = users.id;`;
     db.query(query)
       .then((data) => {
-        console.log(data);
         const stories = data.rows;
         res.json({ stories });
       })
@@ -26,17 +25,20 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    let query = `'INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2)`;
-    let values = [1];
-    db.query(query)
-      .then((data) => {
-        console.log(data);
-        const stories = data.rows;
-        res.json({ stories });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+    const { title, initial_content } = req.body;
+    console.log({ title, initial_content });
+    res.status(201).send();
+    // let query = `'INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2 , $3)`;
+    // let values = [user_id,title,initial_content];
+    // db.query(query,values)
+    //   .then((data) => {
+    //     console.log(data);
+    //     const stories = data.rows;
+    //
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).json({ error: err.message });
+    //   });
   });
   return router;
 };
