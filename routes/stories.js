@@ -5,7 +5,7 @@ module.exports = (db) => {
   // GET homepage
   router.get("/", (req, res) => {
     let query = `
-    SELECT stories.* , users.*
+    SELECT stories.* , users.avatar, users.username
     FROM stories
     JOIN users ON stories.user_id = users.id;`;
     db.query(query)
@@ -19,24 +19,30 @@ module.exports = (db) => {
   });
 
   //Route for Getting both the story, and it's associated contributions
-  router.get('/:storyId', (req, res) => {
+  router.get("/:storyId", (req, res) => {
     const retObj = {};
     db.query(
       `
-      SELECT stories.* FROM stories WHERE id = $1;
-      `,[req.params.storyId]
-    ).then(data => {
-      retObj.story = data.rows[0]
-      db.query(
-        `
-        SELECT contributions.* FROM contributions WHERE story_id = $1
-        `,[req.params.storyId]
-      ).then(data => {
-        retObj.contributions = data.rows;
-        res.json(retObj)
-      }).catch(err => console.log(err))
-    }).catch(err => console.log(err))
-  })
+      SELECT stories.*, users.avatar, users.username FROM stories JOIN users ON users.id = stories.user_id WHERE stories.id = $1;
+      `,
+      [req.params.storyId]
+    )
+      .then((data) => {
+        retObj.story = data.rows[0];
+        db.query(
+          `
+        SELECT contributions.*, users.username FROM contributions JOIN users ON users.id = contributions.user_id WHERE story_id = $1
+        `,
+          [req.params.storyId]
+        )
+          .then((data) => {
+            retObj.contributions = data.rows;
+            res.json(retObj);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  });
 
   router.post("/", (req, res) => {
     const { title, initial_content } = req.body;

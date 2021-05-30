@@ -5,6 +5,7 @@ $(() => {
     loadHomePage();
   });
 
+  //Create Story form events/post
   $(".create-story-form").submit((e) => {
     e.preventDefault();
     let title = $("#title").val();
@@ -12,21 +13,26 @@ $(() => {
 
     $.post("/stories", { title, initial_content })
       .then(() => {
-        $("jquery-modal").hide();
+        $("jquery-modal").hide(); // not working
       })
       .catch((err) => console.log(err));
   });
 
-  // $(".view-story-btn").on("click", () => {
-  //   $.ajax({
-  //     method: "GET",
-  //     url: "/stories",
-  //   }).done((stories) => {
-  //     $("#story").removeClass("hidden").addClass("show");
-  //     $("#home").removeClass("show").addClass("hidden");
-  //     $("#user-stories").removeClass("show").addClass("hidden");
-  //   });
-  // });
+  //View story button click event
+  $(document).on("click", ".view-story-btn", function (e) {
+    $("#story").empty();
+    const story_id = $(this).closest("article[data-id]").attr("data-id");
+    $.ajax(`/stories/${story_id}`)
+      .then((data) => {
+        const { story, contributions } = data;
+        $("#story").prepend(createStory(story));
+        renderContributions(contributions, "#story");
+        $("#story").removeClass("hidden").addClass("show");
+        $("#home").removeClass("show").addClass("hidden");
+        $("#user-stories").removeClass("show").addClass("hidden");
+      })
+      .catch((err) => console.log(err));
+  });
 
   const loadHomePage = () => {
     $.ajax("/stories")

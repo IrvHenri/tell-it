@@ -7,11 +7,11 @@ const escape = function (str) {
 const createDetailedStory = (story) => {};
 
 const createStory = (story) => {
-  const { title, avatar, initial_content, created_at, username } = story;
+  const { title, avatar, initial_content, created_at, username, id } = story;
   const safeTitle = escape(title);
   const safeContent = escape(initial_content);
   const $story = $(`
-  <article class ='story-article'>
+  <article class ='story-article' data-id= ${id}>
   <header>
   <h3> ${username}</h3>
    <div> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
@@ -28,18 +28,27 @@ const createStory = (story) => {
   return $story;
 };
 
+const createContribution = (contribution) => {
+  const { content, created_at, username } = contribution;
+  const $contribution = $(`<article>
+  <header>${username}</header>
+  <p>${content}</p>
+  <footer>${timeago.format(
+    created_at
+  )}<div><i class="fas fa-check-circle"></i><i class="fas fa-arrow-up"></i></div></footer>
+  </article`);
+
+  return $contribution;
+};
+
 const renderStories = (stories, tab) => {
   stories.forEach((story) => {
     $(tab).prepend(createStory(story));
-    //Event listener for 'view more stories'
-    $(".story-article footer button").on("click", function () {
-      console.log(story);
-    });
   });
 };
 
-const renderContributions = (contributions) => {
+const renderContributions = (contributions, tab) => {
   contributions.forEach((contribution) => {
-    $(tab).prepend(createStory(story));
+    $(tab).prepend(createContribution(contribution));
   });
 };
