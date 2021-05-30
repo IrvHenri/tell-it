@@ -39,3 +39,9 @@ const renderStories = (stories, tab) => {
     })
   });
 };
+
+const renderContributions = (contributions) => {
+  contributions.forEach(contribution => {
+    $(tab).prepend(createStory(story));
+  })
+}

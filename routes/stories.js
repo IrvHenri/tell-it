@@ -6,6 +6,7 @@
  */
 
 const express = require("express");
+const { Pool } = require("pg");
 const router = express.Router();
 
 module.exports = (db) => {
@@ -24,6 +25,37 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  //Route for Getting both the story, and it's associated contributions
+  router.get('/:storyId', (req, res) => {
+    const retObj = {};
+    // db.query(`
+    //   SELECT stories.*,
+    //   contributions.user_id as contributor_id,
+    //   contributions.content as contribution_content,
+    //   contributions.created_at as contribution_created_at,
+    //   contributions.is_accepted
+    //   FROM stories
+    //   JOIN contributions ON story_id = stories.id
+    //   WHERE stories.id = $1;
+    // `,[req.params.storyId])
+    // .then(data => res.json(data.rows))
+    db.query(
+      `
+      SELECT stories.* FROM stories WHERE id = $1;
+      `,[req.params.storyId]
+    ).then(data => {
+      retObj.story = data.rows[0]
+      db.query(
+        `
+        SELECT contributions.* FROM contributions WHERE story_id = $1
+        `,[req.params.storyId]
+      ).then(data => {
+        retObj.contributions = data.rows;
+        res.json(retObj)
+      }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+  })
 
   router.post("/", (req, res) => {
     const { title, initial_content } = req.body;
