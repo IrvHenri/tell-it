@@ -17,11 +17,6 @@ $(() => {
       .catch((err) => console.log(err));
   });
 
-  const escape = function (str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
   const renderStories = (stories) => {
     stories.forEach((story) => {
       $("#home").prepend(createStory(story));
