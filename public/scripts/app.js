@@ -10,10 +10,11 @@ $(() => {
     e.preventDefault();
     let title = $("#title").val();
     let initial_content = $("#initial_content").val();
-
-    $.post("/stories", { title, initial_content })
+    const user_id = localStorage.user_id;
+    $.post("/stories", { user_id, title, initial_content })
       .then(() => {
-        $("jquery-modal").hide(); // not working
+        loadHomePage();
+        console.log("Success!");
       })
       .catch((err) => console.log(err));
   });

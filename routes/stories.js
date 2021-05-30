@@ -45,20 +45,22 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const { title, initial_content } = req.body;
-    console.log({ title, initial_content });
-    res.status(201).send();
-    // let query = `'INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2 , $3)`;
-    // let values = [user_id,title,initial_content];
-    // db.query(query,values)
-    //   .then((data) => {
-    //     console.log(data);
-    //     const stories = data.rows;
-    //
-    //   })
-    //   .catch((err) => {
-    //     res.status(500).json({ error: err.message });
-    //   });
+    const { title, initial_content, user_id } = req.body;
+    console.log(title, initial_content, user_id);
+    let query = `INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2 , $3) RETURNING *`;
+    let values = [user_id, title, initial_content];
+    db.query(query, values)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // Form that submits contribution
+  router.post("/:story_id/contribution", (req, res) => {
+    let query = ``;
   });
   return router;
 };
