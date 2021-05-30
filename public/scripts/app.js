@@ -17,7 +17,7 @@ $(() => {
       .catch((err) => console.log(err));
   });
 
-  // $("#story-page").on("click", () => {
+  // $(".view-story-btn").on("click", () => {
   //   $.ajax({
   //     method: "GET",
   //     url: "/stories",
@@ -25,16 +25,6 @@ $(() => {
   //     $("#story").removeClass("hidden").addClass("show");
   //     $("#home").removeClass("show").addClass("hidden");
   //     $("#user-stories").removeClass("show").addClass("hidden");
-  //   });
-  // });
-  // $("#user-page").on("click", () => {
-  //   $.ajax({
-  //     method: "GET",
-  //     url: "/stories",
-  //   }).done((stories) => {
-  //     $("#user-stories").removeClass("hidden").addClass("show");
-  //     $("#story").removeClass("show").addClass("hidden");
-  //     $("#story").removeClass("show").addClass("hidden");
   //   });
   // });
 

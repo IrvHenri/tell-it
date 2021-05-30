@@ -4,9 +4,7 @@ const escape = function (str) {
   return div.innerHTML;
 };
 
-const createDetailedStory = (story) => {
-
-}
+const createDetailedStory = (story) => {};
 
 const createStory = (story) => {
   const { title, avatar, initial_content, created_at, username } = story;
@@ -23,7 +21,7 @@ const createStory = (story) => {
 
   <footer> <small>${timeago.format(
     created_at
-  )} </small> <button> View Story </button> </footer>
+  )} </small> <button class = 'view-story-btn' > View Story </button> </footer>
   </article>
 
   `);
@@ -34,14 +32,14 @@ const renderStories = (stories, tab) => {
   stories.forEach((story) => {
     $(tab).prepend(createStory(story));
     //Event listener for 'view more stories'
-    $('.story-article footer button').on('click', function() {
+    $(".story-article footer button").on("click", function () {
       console.log(story);
-    })
+    });
   });
 };
 
 const renderContributions = (contributions) => {
-  contributions.forEach(contribution => {
+  contributions.forEach((contribution) => {
     $(tab).prepend(createStory(story));
-  })
-}
+  });
+};
