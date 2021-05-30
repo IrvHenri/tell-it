@@ -42,7 +42,7 @@ $(() => {
     $.ajax("/stories")
       .then((data) => {
         let stories = data.stories;
-        renderStories(stories);
+        renderStories(stories, "#home");
         $("#home").removeClass("hidden").addClass("show");
         $("#story").removeClass("show").addClass("hidden");
         $("#user-stories").removeClass("show").addClass("hidden");

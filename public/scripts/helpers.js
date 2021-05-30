@@ -4,6 +4,10 @@ const escape = function (str) {
   return div.innerHTML;
 };
 
+const createDetailedStory = (story) => {
+
+}
+
 const createStory = (story) => {
   const { title, avatar, initial_content, created_at, username } = story;
   const safeTitle = escape(title);
@@ -26,9 +30,9 @@ const createStory = (story) => {
   return $story;
 };
 
-const renderStories = (stories) => {
+const renderStories = (stories, tab) => {
   stories.forEach((story) => {
-    $("#home").prepend(createStory(story));
+    $(tab).prepend(createStory(story));
     //Event listener for 'view more stories'
     $('.story-article footer button').on('click', function() {
       console.log(story);

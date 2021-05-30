@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script type="text/javascript" src="/scripts/login.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Source+Sans+Pro:wght@400;700;900&display=swap"
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
 
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -34,7 +35,7 @@
     />
     <script type="text/javascript" src="/scripts/helpers.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/userStories.js"></script>
     <title>Tell-it</title>
   </head>
   <body>
@@ -46,6 +47,8 @@
         <li id="user-page">My stories</li>
       </ul>
       <main class="content-container">
+        <!-- Maybe it'd be easier if instead of simultaneously rendering, we just empty the
+             content-container, and repopulate with the data associated with that tab? Less moving parts-->
         <div id="home" class="show"></div>
         <div id="story" class="hidden">2</div>
         <div id="user-stories" class="hidden">3</div>

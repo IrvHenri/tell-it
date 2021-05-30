@@ -11,7 +11,8 @@ const router = express.Router();
 module.exports = (db) => {
   // GET homepage
   router.get("/", (req, res) => {
-    let query = `SELECT stories.* , users.*
+    let query = `
+    SELECT stories.* , users.*
     FROM stories
     JOIN users ON stories.user_id = users.id;`;
     db.query(query)
