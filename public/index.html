@@ -50,19 +50,22 @@
         <!-- Maybe it'd be easier if instead of simultaneously rendering, we just empty the
              content-container, and repopulate with the data associated with that tab? Less moving parts-->
         <div id="home" class="show"></div>
-        <div id="story" class="hidden">2</div>
+        <div id="story" class="hidden">
+
+        </div>
         <div id="user-stories" class="hidden">3</div>
       </main>
       <div id="ex1" class="modal create-modal">
-        <h3>Begin a story!</h3>
+        <h3>Tell a story!</h3>
         <form method="POST" action="/stories" class="create-story-form">
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="title"
-            required
-          />
+          <label for="title"></label>
+            Title:<input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="title"
+              required
+          /></label>
           <textarea
             name="initial_content"
             id="initial_content"
@@ -71,12 +74,12 @@
             placeholder="Once upon a time..."
             required
           ></textarea>
-          <button type="submit">Send</button>
+          <button type="submit" class="create-story-submit">Send</button>
         </form>
       </div>
 
       <button class="create-story-btn">
-        <a href="#ex1" rel="modal:open"><i class="fas fa-feather-alt"></i></a>
+        <a href="#ex1" rel="modal:open"><i class="fas fa-pencil-alt"></i></a>
       </button>
     </div>
   </body>

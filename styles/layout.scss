@@ -6,9 +6,14 @@
 * {
   margin: 0;
 }
-
+$primary-btn-color: #35d461;
+$secondary-btn-color: #37b6f6;
+$home-page-bg-color: #72d4f5;
+$story-page-bg-color: #047cac;
+$user-stories-bg-color: #9ad2a9;
+$primary-bg-color: #f5f5f5;
 body {
-  background-color: #f5f5f5;
+  background-color: $primary-bg-color;
   h1 {
     color: #244751;
     font-family: "Gloria Hallelujah", cursive;
@@ -18,11 +23,10 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
-$primary-btn-color: #35d461;
-$secondary-btn-color: #37b6f6;
-$home-page-bg-color: #72d4f5;
-$story-page-bg-color: #047cac;
-$user-stories-bg-color: #9ad2a9;
+button:hover {
+  cursor: pointer;
+}
+
 /* =============
     Typography
 ================ */
@@ -41,7 +45,7 @@ $user-stories-bg-color: #9ad2a9;
   margin: 0 auto;
   width: 75%;
   max-width: 1000px;
-  border-radius: 45px;
+  border-radius: 20px;
   overflow: auto;
 }
 
@@ -65,7 +69,6 @@ $user-stories-bg-color: #9ad2a9;
   background: $home-page-bg-color;
 }
 #home article {
-  background: #639fb0;
   margin: 0 auto;
   margin-top: 2em;
 }
@@ -124,15 +127,40 @@ $user-stories-bg-color: #9ad2a9;
   }
 }
 
+.modal {
+  background: yellow;
+}
+.create-modal {
+  h3 {
+    text-align: center;
+    font-family: "Gloria Hallelujah", cursive;
+  }
+}
+
 .create-story-form {
-  background: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  margin: 0 auto;
+  input,
+  textarea {
+    width: 75%;
+  }
+  textarea {
+    resize: none;
+  }
+  .create-story-submit {
+    width: 50%;
+  }
 }
 
 // story article
 .story-article {
+  background: $primary-bg-color;
   width: 85%;
   max-width: 550px;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 1.5em;
   header {
     display: flex;
@@ -156,11 +184,37 @@ $user-stories-bg-color: #9ad2a9;
   button {
     padding: 0.3em 0.7em;
     border: 0;
+    border-radius: 5px;
     background-color: $primary-btn-color;
     transition: 200ms ease-in;
     &:hover {
       cursor: pointer;
       background: darken($primary-btn-color, 5%);
     }
+  }
+}
+
+// Story Tab
+
+.contribution-widget {
+  border: 2px solid red;
+  padding: 1em;
+  border-radius: 10px;
+  h2 {
+    padding: 0.3em;
+    margin-bottom: 1em;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  textarea {
+    resize: none;
+    padding: 0.5em;
+  }
+  button {
+    width: 20%;
+    margin-right: auto;
   }
 }
