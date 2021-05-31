@@ -55,9 +55,18 @@ module.exports = (db) => {
     AND user_id = $2
     `,[req.params.contribution_id, userId])
     .then(data => {
-      //If data is empty, then no upvote exists. Go ahead and add one.
-
-      //Else, return an error
+      if(data.rows[0]){
+        res.status(400).json({error: "Error: User has already upvoted this contribution!"})
+      } else {
+        //If data.rows[0] is undefined, then no upvote exists. Go ahead and add one.
+        db.query(`
+        INSERT INTO upvotes (user_id, contribution_id) VALUES ($1, $2) RETURNING *;
+        `,[userId, req.params.contribution_id])
+        .then(data => {
+          res.json(data.rows[0])
+        })
+        .catch(err => console.log(err))
+      }
     })
     .catch(err => console.log(err))
   })
