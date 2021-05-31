@@ -44,6 +44,19 @@ module.exports = (db) => {
       .catch((err) => console.log(err));
   });
 
+  //Gets all accepted contributions for story, and orders by c
+  router.get('/story_id/acceptedContributions', (req, res) => {
+    db.query(`
+      SELECT * FROM contributions
+      WHERE story_id = $1 AND is_accepted = 'accepted'
+      ORDER BY accepted_at;
+    `,[req.params.story_id])
+    .then(data => {
+      res.json(data.rows)
+    })
+    .catch(err => console.log(err))
+  })
+
   router.post("/", (req, res) => {
     const { title, initial_content, user_id } = req.body;
     console.log(title, initial_content, user_id);

@@ -28,10 +28,15 @@ module.exports = (db) => {
       if(is_accepted === 'not reviewed'){
         db.query(`
         UPDATE contributions
-        SET is_accepted = CASE
+        SET
+        is_accepted = CASE
           WHEN (contributions.id = $1 AND contributions.story_id = $2) THEN 'accepted'
           WHEN (contributions.id <> $1 AND contributions.story_id = $2) THEN 'rejected'
-          ELSE 'not reviewed'
+          ELSE is_accepted
+        END,
+        accepted_at = CASE
+          WHEN (contributions.id = $1 AND contributions.story_id = $2) THEN NOW()
+          ELSE accepted_at
         END
         RETURNING *;
         `,[id, story_id])
