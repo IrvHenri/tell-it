@@ -50,8 +50,8 @@ module.exports = (db) => {
     let query = `INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2 , $3) RETURNING *`;
     let values = [user_id, title, initial_content];
     db.query(query, values)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        res.status(204).json({ message: "Success" });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -60,7 +60,28 @@ module.exports = (db) => {
 
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
-    let query = ``;
+    let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
+    const { user_id, story_id, content } = req.body;
+    console.log(user_id, story_id, content);
+    let values = [user_id, story_id, content];
+    db.query(query, values)
+      .then(() => {
+        res.status(204).json({ message: "Success" });
+      })
+      .catch((err) => res.status(500).json({ error: err.message }));
+  });
+
+  // User marks story complete
+
+  router.post("/:story_id", (req, res) => {
+    let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
+    let values = [req.params.story_id];
+
+    db.query(query, values)
+      .then(() => {
+        res.status(204).json({ message: "Success" });
+      })
+      .catch((err) => res.status(500).json({ error: err.message }));
   });
   return router;
 };
