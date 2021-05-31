@@ -59,7 +59,6 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const { title, initial_content, user_id } = req.body;
-    console.log(title, initial_content, user_id);
     let query = `INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2 , $3) RETURNING *`;
     let values = [user_id, title, initial_content];
     db.query(query, values)
@@ -74,8 +73,16 @@ module.exports = (db) => {
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
     let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
+    console.log(req.body);
     const { user_id, story_id, content } = req.body;
-    console.log(user_id, story_id, content);
+    console.log(
+      "user_id:",
+      user_id,
+      "story_id:",
+      story_id,
+      "content:",
+      content
+    );
     let values = [user_id, story_id, content];
     db.query(query, values)
       .then(() => {
