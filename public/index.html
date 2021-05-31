@@ -43,18 +43,9 @@
     <div class="app-container">
       <ul class="nav-tabs">
         <li id="home-page">Home</li>
-        <li id="story-page">Story</li>
         <li id="user-page">My stories</li>
       </ul>
-      <main class="content-container">
-        <!-- Maybe it'd be easier if instead of simultaneously rendering, we just empty the
-             content-container, and repopulate with the data associated with that tab? Less moving parts-->
-        <div id="home" class="show"></div>
-        <div id="story" class="hidden">
-
-        </div>
-        <div id="user-stories" class="hidden">3</div>
-      </main>
+      <main class="content-container"></main>
       <div id="ex1" class="modal create-modal">
         <h3>Tell a story!</h3>
         <form method="POST" action="/stories" class="create-story-form">

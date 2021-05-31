@@ -47,6 +47,7 @@ button:hover {
   max-width: 1000px;
   border-radius: 20px;
   overflow: auto;
+  border: solid 1px black;
 }
 
 // Tab div containers
@@ -77,7 +78,7 @@ button:hover {
 
 .nav-tabs {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   #home-page {
     background: $home-page-bg-color;
   }
