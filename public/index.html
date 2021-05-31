@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="text/javascript" src="/scripts/login.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Source+Sans+Pro:wght@400;700;900&display=swap"
@@ -14,7 +13,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
 
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+    <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -28,6 +27,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link
       rel="stylesheet"
@@ -39,7 +39,16 @@
     <title>Tell-it</title>
   </head>
   <body>
-    <h1>Tell-it!</h1>
+    <nav class="navbar">
+      <h1>Tell-it!</h1>
+      <span class="user-login">
+        <!-- <form>
+          <input type="text">
+          <button>Login</button>
+        </form> -->
+      </span>
+    </nav>
+    <!-- <h1>Tell-it!</h1> -->
     <div class="app-container">
       <ul class="nav-tabs">
         <li id="home-page">Home</li>

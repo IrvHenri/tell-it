@@ -37,7 +37,7 @@ $(() => {
         const { story, contributions } = data;
         $(".content-container").prepend(createStory(story));
         $(".content-container").prepend($contributionWidget);
-        renderContributions(contributions, "#story");
+        renderContributions(contributions, ".content-container");
       })
       .catch((err) => console.log(err));
   });
