@@ -15,6 +15,26 @@ module.exports = (db) => {
       });
   });
 
+  router.post('/login', (req, res) => {
+    const {loginVal} = req.body
+    //res.json(`${loginVal} Hello`)
+    db.query(`
+    SELECT * FROM users
+    WHERE id = $1
+    `,[loginVal])
+    .then(data => {
+      const user = data.rows[0];
+      if(user) {
+        res.json(user)
+      } else {
+        res.status(400).json({error: "Error. User Does not exist..."})
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
+
   router.get("/:id", (req, res) => {
     db.query(`
     SELECT * FROM users WHERE id = $1;

@@ -15,10 +15,16 @@ const renderLoginForm = () => {
   }
 }
 
-const login = (val) => {
+const login = (loginVal) => {
   //More robust login/auth TBD
-  localStorage.setItem('user_id', val);
-  location.reload()
+  $.post('/users/login', {loginVal})
+  .then(data => {
+    console.log(data)
+    localStorage.setItem('user_id', data.id);
+    location.reload()
+  })
+  .catch(err => console.log(err))
+  // localStorage.setItem('user_id', val);
 }
 
 const logout = () => {
