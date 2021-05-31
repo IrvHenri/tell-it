@@ -48,7 +48,8 @@ const renderStories = (stories, tab) => {
 };
 
 const renderContributions = (contributions, tab) => {
-  contributions.forEach((contribution) => {
+  $(tab).empty()
+  contributions.map(contribution => {
     $(tab).prepend(createContribution(contribution));
-  });
+  })
 };
