@@ -12,24 +12,27 @@ $(() => {
     const initial_content = $("#initial_content").val();
     const user_id = localStorage.user_id;
 
-    $(".jquery-modal").css("display", "none");
+    //$(".jquery-modal").css("display", "none");
+    $.modal.close();
     $.post("/stories", { user_id, title, initial_content })
-      .then(() => {
-        loadHomePage();
-        console.log("Success!");
-      })
-      .catch((err) => console.log(err));
+      // .then(() => {
+      //   loadHomePage();
+      //   console.log("Success!");
+      // })
+      // .catch((err) => console.log(err));
+      .then(loadHomePage)
   });
 
   // AJAX GET - View story button
   $(document).on("click", ".view-story-btn", function (e) {
     $("#story").empty();
     const story_id = $(this).closest("article[data-id]").attr("data-id");
-    let $contributionWidget = $(`<div class= 'contribution-widget'>
+    let $contributionWidget = $(`
+    <div class= 'contribution-widget'>
       <h2>Submit a contribution!</h2>
       <form class= 'contribution-form' method="POST" action="/stories/${story_id}/contribution">
         <textarea id ='content' name="content" type="text" rows="4" cols="50" placeholder="What comes next?">
-</textarea>
+        </textarea>
         <button type="submit">Submit</button>
       </form>
       </div>
