@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -16,12 +16,10 @@ module.exports = (db) => {
   });
 
   router.post('/login', (req, res) => {
-    const {loginVal} = req.body
-    //res.json(`${loginVal} Hello`)
     db.query(`
     SELECT * FROM users
-    WHERE id = $1
-    `,[loginVal])
+    WHERE username = $1
+    `,[req.body.loginVal])
     .then(data => {
       const user = data.rows[0];
       if(user) {

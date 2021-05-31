@@ -16,7 +16,6 @@ const renderLoginForm = () => {
 }
 
 const login = (loginVal) => {
-  //More robust login/auth TBD
   $.post('/users/login', {loginVal})
   .then(data => {
     console.log(data)
@@ -24,7 +23,6 @@ const login = (loginVal) => {
     location.reload()
   })
   .catch(err => console.log(err))
-  // localStorage.setItem('user_id', val);
 }
 
 const logout = () => {
