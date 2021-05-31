@@ -6,5 +6,6 @@ CREATE TABLE contributions (
   story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
   content TEXT NOT NULL,
   is_accepted TEXT DEFAULT 'not reviewed',
-  created_at DATE NOT NULL DEFAULT NOW()
+  created_at DATE NOT NULL DEFAULT NOW(),
+  accepted_at DATE
 );
