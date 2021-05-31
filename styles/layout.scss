@@ -47,32 +47,25 @@ button:hover {
   max-width: 1000px;
   border-radius: 20px;
   overflow: auto;
-  border: solid 1px black;
+  background: $home-page-bg-color;
+}
+
+.content-container article {
+  margin: 0 auto;
+  margin: 2em auto;
 }
 
 // Tab div containers
-#home,
-#stories,
-#user-stories {
-  width: 100%;
-  padding: 2em;
-}
+// #home,
+// #stories,
+// #user-stories {
+//   width: 100%;
+//   padding: 2em;
+// }
 
-.show {
-  display: block;
-}
-
-.hidden {
-  display: none;
-}
-
-#home {
-  background: $home-page-bg-color;
-}
-#home article {
-  margin: 0 auto;
-  margin-top: 2em;
-}
+// #home {
+//   background: $home-page-bg-color;
+// }
 
 // Main Tab headers
 
