@@ -16,13 +16,15 @@ const renderLoginForm = () => {
 }
 
 const login = (loginVal) => {
+  $(".user-login .login-error").remove()
   $.post('/users/login', {loginVal})
   .then(data => {
-    console.log(data)
     localStorage.setItem('user_id', data.id);
     location.reload()
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    $(".user-login").prepend(`<p class='login-error'>ERROR: INCORRECT CREDENTIALS</p>`)
+  })
 }
 
 const logout = () => {
