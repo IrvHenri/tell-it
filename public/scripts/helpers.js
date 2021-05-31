@@ -47,6 +47,10 @@ const renderStories = (stories, tab) => {
   });
 };
 
+const renderStory = (story, tab) => {
+  $(tab).append(createStory(story));
+};
+
 const renderContributions = (contributions, tab) => {
   $(tab).empty();
   contributions.map((contribution) => {

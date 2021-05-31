@@ -1,5 +1,15 @@
 $(() => {
-  // Homepage events/clicks
+  // Home Tab event
+
+  const loadHomePage = () => {
+    $.ajax("/stories")
+      .then((data) => {
+        let stories = data.stories;
+        renderStories(stories, ".content-container");
+      })
+      .catch((err) => console.log(err));
+  };
+
   $("#home-page").on("click", () => {
     $(".content-container").empty();
     $(".content-container").removeClass("view-story-container");
@@ -12,25 +22,16 @@ $(() => {
     const title = $("#title").val();
     const initial_content = $("#initial_content").val();
     const user_id = localStorage.user_id;
-
     $.modal.close();
     $.post("/stories", { user_id, title, initial_content })
       .then(loadHomePage)
       .catch((err) => console.log(err));
   });
 
-  const loadHomePage = () => {
-    $.ajax("/stories")
-      .then((data) => {
-        let stories = data.stories;
-        renderStories(stories, ".content-container");
-      })
-      .catch((err) => console.log(err));
-  };
-
   // AJAX GET - View story button
   $(document).on("click", ".view-story-btn", function (e) {
     $(".content-container").empty();
+    //Add View story styling
     $(".content-container").addClass("view-story-container");
     const story_id = $(this).closest("article[data-id]").attr("data-id");
     let $contributionWidget = $(`
@@ -49,8 +50,8 @@ $(() => {
     $.ajax(`/stories/${story_id}`)
       .then((data) => {
         const { story, contributions } = data;
-        $(".content-container").prepend(createStory(story));
         $(".content-container").prepend($contributionWidget);
+        renderStory(story, ".content-container");
         renderContributions(contributions, ".contribution-container");
       })
       .catch((err) => console.log(err));
@@ -64,28 +65,27 @@ $(() => {
         content,
       }).then(() => {
         $(".contribution-widget textarea").val("");
-        $.get(`/stories/${story_id}`)
-          .then($(".content-container").empty())
-          .then((data) => {
-            const { story, contributions } = data;
-            $(".content-container").prepend(createStory(story));
-            $(".content-container").prepend($contributionWidget);
-            renderContributions(contributions, ".contribution-container");
-          });
+        $.ajax(`/stories/${story_id}`).then((data) => {
+          const { story, contributions } = data;
+          $(".content-container").empty();
+          $(".content-container").prepend($contributionWidget);
+          renderStory(story, ".content-container");
+          renderContributions(contributions, ".contribution-container");
+        });
       });
     });
   });
 
   $(document).on("click", ".mark-complete-btn", function () {
     const story_id = $(this).closest("article[data-id]").attr("data-id");
-
+    // Need to Validate
     $.post(`/stories/${story_id}`, { story_id: story_id })
       .then(() => {
         $.get(`/stories/${story_id}`)
           .then((data) => {
             const { story } = data;
             $(".content-container").empty();
-            $(".content-container").prepend(createStory(story));
+            renderStory(story, ".content-container");
           })
           .catch((e) => console.log(e));
       })
