@@ -50,6 +50,29 @@ button:hover {
   background: $home-page-bg-color;
 }
 
+.view-story-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2em;
+  .story-article {
+    margin-top: 0;
+    width: 50%;
+  }
+  .side-bar {
+    width: 45%;
+  }
+  .text-field {
+    width: 100%;
+  }
+
+  .contribution {
+    border: 2px solid red;
+    padding: 1em;
+  }
+}
+
 .content-container article {
   margin: 0 auto;
   margin: 2em auto;
@@ -187,6 +210,9 @@ button:hover {
     }
   }
 }
+.mark-complete-btn {
+  // display: none;
+}
 
 // Story Tab
 
@@ -208,7 +234,7 @@ button:hover {
     padding: 0.5em;
   }
   button {
-    width: 20%;
+    width: 30%;
     margin-right: auto;
   }
 }

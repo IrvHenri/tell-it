@@ -45,17 +45,20 @@ module.exports = (db) => {
   });
 
   //Gets all accepted contributions for story, and orders by c
-  router.get('/story_id/acceptedContributions', (req, res) => {
-    db.query(`
+  router.get("/story_id/acceptedContributions", (req, res) => {
+    db.query(
+      `
       SELECT * FROM contributions
       WHERE story_id = $1 AND is_accepted = 'accepted'
       ORDER BY accepted_at;
-    `,[req.params.story_id])
-    .then(data => {
-      res.json(data.rows)
-    })
-    .catch(err => console.log(err))
-  })
+    `,
+      [req.params.story_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => console.log(err));
+  });
 
   router.post("/", (req, res) => {
     const { title, initial_content, user_id } = req.body;
@@ -95,7 +98,9 @@ module.exports = (db) => {
 
   router.post("/:story_id", (req, res) => {
     let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
-    let values = [req.params.story_id];
+    const { story_id } = req.body;
+    let story_idToInt = Number(story_id);
+    let values = [story_idToInt];
 
     db.query(query, values)
       .then(() => {

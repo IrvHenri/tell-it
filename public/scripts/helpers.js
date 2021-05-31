@@ -21,7 +21,7 @@ const createStory = (story) => {
 
   <footer> <small>${timeago.format(
     created_at
-  )} </small> <button class = 'view-story-btn' > View Story </button> </footer>
+  )} </small><button class = 'mark-complete-btn'>Mark Complete</button> <button class = 'view-story-btn' > View Story </button> </footer>
   </article>
 
   `);
@@ -30,13 +30,13 @@ const createStory = (story) => {
 
 const createContribution = (contribution) => {
   const { content, created_at, username } = contribution;
-  const $contribution = $(`<article>
+  const $contribution = $(`<article class='contribution'>
   <header>${username}</header>
   <p>${content}</p>
   <footer>${timeago.format(
     created_at
   )}<div><i class="fas fa-check-circle"></i><i class="fas fa-arrow-up"></i></div></footer>
-  </article`);
+  </article>`);
 
   return $contribution;
 };
@@ -48,8 +48,8 @@ const renderStories = (stories, tab) => {
 };
 
 const renderContributions = (contributions, tab) => {
-  $(tab).empty()
-  contributions.map(contribution => {
-    $(tab).prepend(createContribution(contribution));
-  })
+  $(tab).empty();
+  contributions.map((contribution) => {
+    $(tab).append(createContribution(contribution));
+  });
 };
