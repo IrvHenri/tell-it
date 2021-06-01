@@ -6,6 +6,15 @@
 * {
   margin: 0;
 }
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
 $primary-btn-color: #35d461;
 $secondary-btn-color: #37b6f6;
 $home-page-bg-color: #72d4f5;
@@ -16,16 +25,17 @@ $box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
   0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
   0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
   0 100px 80px rgba(0, 0, 0, 0.12);
+
 body {
   background-color: $primary-bg-color;
   background-image: url("../public/imgs/v661-tk-24-watercolorpattern.jpg");
   h1 {
-    color: #244751;
     font-family: "Gloria Hallelujah", cursive;
     text-align: center;
     font-size: 4rem;
   }
   font-family: "Source Sans Pro", sans-serif;
+  color: #232b2b;
 }
 
 button {
@@ -67,7 +77,6 @@ button {
 }
 
 .view-story-container {
-  border: 2px solid blue;
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-start;
