@@ -18,6 +18,8 @@ $(() => {
       .then((data) => {
         const { story, contributions } = data;
         if (story.is_complete) {
+          $(".content-container").removeClass("view-user-page");
+          $(".content-container").removeClass("view-story-container");
           renderViewedStory(story, ".content-container", false);
         } else {
           isAuthorView(story, contributions, $contributionWidget);

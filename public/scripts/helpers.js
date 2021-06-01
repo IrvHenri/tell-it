@@ -109,7 +109,7 @@ const createContribution = (contribution, index) => {
   <p>${content}</p>
   <footer>
     ${timeago.format(created_at)}
-    <div class= contribution-btn-container-div>
+    <div class= 'contribution-btn-container'>
       <i class="fas fa-check-circle"></i>
       <button data-id = ${id} class='upvote-btn'>
         <i class="fas fa-arrow-up"></i>
@@ -131,7 +131,7 @@ const renderStory = (story, tab) => {
   $(tab).append(createStory(story));
 };
 
-const renderViewedStory = (story, tab, isAuthor) => {
+const renderViewedStory = (story, tab, isAuthor, isComplete) => {
   $(tab).append(createViewedStory(story, isAuthor));
 };
 
