@@ -3,6 +3,7 @@ $(() => {
   $("#user-page").on("click", () => {
     $(".content-container").empty();
     $(".content-container").removeClass("view-story-container");
+    $(".content-container").addClass("user-page");
     loadStoriesPage();
   });
 

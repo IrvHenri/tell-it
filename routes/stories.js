@@ -23,7 +23,7 @@ module.exports = (db) => {
     const retObj = {};
     db.query(
       `
-      SELECT stories.*, users.avatar, users.username FROM stories JOIN users ON users.id = stories.user_id WHERE stories.id = $1;
+      SELECT stories.*, users.avatar, users.username  FROM stories JOIN users ON users.id = stories.user_id WHERE stories.id = $1;
       `,
       [req.params.storyId]
     )
@@ -31,7 +31,7 @@ module.exports = (db) => {
         retObj.story = data.rows[0];
         db.query(
           `
-        SELECT contributions.*, users.username FROM contributions JOIN users ON users.id = contributions.user_id WHERE story_id = $1
+        SELECT contributions.*, users.username, users.avatar FROM contributions JOIN users ON users.id = contributions.user_id WHERE story_id = $1
         `,
           [req.params.storyId]
         )

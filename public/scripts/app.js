@@ -13,6 +13,7 @@ $(() => {
   $("#home-page").on("click", () => {
     $(".content-container").empty();
     $(".content-container").removeClass("view-story-container");
+    $(".content-container").removeClass("user-page");
     loadHomePage();
   });
 

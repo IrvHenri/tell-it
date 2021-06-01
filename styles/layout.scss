@@ -12,8 +12,13 @@ $home-page-bg-color: #72d4f5;
 $story-page-bg-color: #047cac;
 $user-stories-bg-color: #9ad2a9;
 $primary-bg-color: #f5f5f5;
+$box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
 body {
   background-color: $primary-bg-color;
+  background-image: url("../public/imgs/v661-tk-24-watercolorpattern.jpg");
   h1 {
     color: #244751;
     font-family: "Gloria Hallelujah", cursive;
@@ -23,8 +28,16 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
-button:hover {
-  cursor: pointer;
+button {
+  padding: 0.3em 0.7em;
+  border: 0;
+  border-radius: 5px;
+  background-color: $primary-btn-color;
+  transition: 200ms ease-in;
+  &:hover {
+    cursor: pointer;
+    background: darken($primary-btn-color, 5%);
+  }
 }
 
 /* =============
@@ -45,50 +58,17 @@ button:hover {
   margin: 0 auto;
   width: 75%;
   max-width: 1000px;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: auto;
+  min-height: 50vh;
   background: $home-page-bg-color;
-}
-
-.view-story-container {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 2em;
-  .story-article {
-    margin-top: 0;
-    width: 50%;
-  }
-  .side-bar {
-    width: 45%;
-  }
-  .text-field {
-    width: 100%;
-  }
-
-  .contribution {
-    border: 2px solid red;
-    padding: 1em;
-  }
+  box-shadow: $box-shadow;
 }
 
 .content-container article {
   margin: 0 auto;
   margin: 2em auto;
 }
-
-// Tab div containers
-// #home,
-// #stories,
-// #user-stories {
-//   width: 100%;
-//   padding: 2em;
-// }
-
-// #home {
-//   background: $home-page-bg-color;
-// }
 
 // Main Tab headers
 
@@ -109,11 +89,10 @@ button:hover {
     font-size: 2rem;
     list-style: none;
     border-bottom: 0;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
     margin-left: 1em;
     padding: 0.3em 0.8em;
-
     &:hover {
       cursor: pointer;
     }
@@ -158,17 +137,26 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 75%;
+  width: 85%;
   margin: 0 auto;
   input,
   textarea {
     width: 75%;
+    padding: 0.5em;
   }
   textarea {
     resize: none;
   }
-  .create-story-submit {
-    width: 50%;
+  button {
+    padding: 0.3em 0.7em;
+    border: 0;
+    border-radius: 5px;
+    background-color: $primary-btn-color;
+    transition: 200ms ease-in;
+    &:hover {
+      cursor: pointer;
+      background: darken($primary-btn-color, 5%);
+    }
   }
 }
 
@@ -184,6 +172,7 @@ button:hover {
     align-items: center;
   }
   .avatar {
+    margin-left: 0.5em;
     width: 25px;
     height: 25px;
   }
@@ -197,27 +186,39 @@ button:hover {
     justify-content: space-between;
     align-items: center;
   }
+}
 
-  button {
-    padding: 0.3em 0.7em;
-    border: 0;
-    border-radius: 5px;
-    background-color: $primary-btn-color;
-    transition: 200ms ease-in;
-    &:hover {
-      cursor: pointer;
-      background: darken($primary-btn-color, 5%);
-    }
-  }
+.story-article:first-child {
+  margin-top: 5em;
 }
-.mark-complete-btn {
-  // display: none;
-}
+
+//TEMPORARY
+// .mark-complete-btn {
+//   display: none;
+// }
 
 // Story Tab
 
+.view-story-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2em;
+  .story-article {
+    margin-top: 0;
+    width: 50%;
+  }
+  .side-bar {
+    width: 45%;
+  }
+  .text-field {
+    width: 100%;
+  }
+}
+
 .contribution-widget {
-  border: 2px solid red;
+  background: $story-page-bg-color;
   padding: 1em;
   border-radius: 10px;
   h2 {
@@ -232,9 +233,53 @@ button:hover {
   textarea {
     resize: none;
     padding: 0.5em;
+    border-radius: 15px;
   }
   button {
     width: 30%;
     margin-right: auto;
   }
+}
+
+.contribution {
+  border-radius: 16px;
+  padding: 1.5em;
+  padding: 1em;
+  transition: 200ms ease-in;
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+  header {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    .avatar {
+      margin-left: 0.5em;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  p {
+    padding: 1em 0;
+  }
+  footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .contribution-icons {
+    &:hover {
+      cursor: pointer;
+    }
+    i {
+      transition: 200ms ease-in;
+      margin-left: 0.7em;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.user-page {
+  background: $user-stories-bg-color;
 }

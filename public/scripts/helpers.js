@@ -28,16 +28,29 @@ const createStory = (story) => {
   return $story;
 };
 
+const randomColor = () => {
+  const colors = [
+    "#35d461",
+    "#37b6f6",
+    "#639fb0",
+    "#047cac",
+    "#9ad2a9",
+    "#f5f5f5",
+  ];
+  let randomNum = Math.floor(Math.random() * 5) + 1;
+  return colors[randomNum];
+};
+
 const createContribution = (contribution) => {
-  const { content, created_at, username } = contribution;
+  const { content, created_at, username, avatar } = contribution;
   const $contribution = $(`<article class='contribution'>
-  <header>${username}</header>
+  <header>${username} <div> <img  src = ${avatar} alt = 'avatar' class = 'avatar'>  </div></header>
   <p>${content}</p>
   <footer>${timeago.format(
     created_at
-  )}<div><i class="fas fa-check-circle"></i><i class="fas fa-arrow-up"></i></div></footer>
+  )}<div class ='contribution-icons'><i class="fas fa-check-circle"></i><i class="fas fa-arrow-up"></i></div></footer>
   </article>`);
-
+  $($contribution).css("background", randomColor());
   return $contribution;
 };
 
