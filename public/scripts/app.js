@@ -2,6 +2,7 @@ $(() => {
   // Home Tab event
 
   const loadHomePage = () => {
+    $(".content-container").empty();
     $.ajax("/stories")
       .then((data) => {
         let stories = data.stories;
