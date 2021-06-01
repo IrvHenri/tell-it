@@ -3,11 +3,19 @@ $(() => {
     const user_id = localStorage.getItem("user_id")
     const contribution_id = $(this).attr("data-id")
     $.post(`/contributions/${contribution_id}/upvote`, {user_id})
-    .then(() => {
-      console.log($(this).closest(".contribution-container").attr("data-id"))
-      //Reload the stories page... or use the hacky solution of adding one to upvotes.
-      //location.reload()
+    .then(data => {
+      $.get(`/contributions/${data.contribution_id}/upvotes`)
+      .then(data => {
+        $(this)
+        .closest('.contribution')
+        .children('h5')
+        .children('span')
+        .text(data.count)
+      })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log("NO UPVOTE")
+      console.log(err)
+    })
   })
 })

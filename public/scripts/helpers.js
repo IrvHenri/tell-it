@@ -100,7 +100,9 @@ const randomColor = () => {
 const createContribution = (contribution, index) => {
   const { id, avatar, content, created_at, username, upvotes } = contribution;
   const $contribution = $(`<article class='contribution'>
-  <p>Upvotes: ${upvotes}</p>
+  <h5>Upvotes:
+  <span class='upvote-count'>${upvotes}</span>
+  </h5>
   <header>Contribution #${
     index + 1
   }  <div><p>${username}</p> <img  src = ${avatar} alt = 'avatar' class = 'avatar'>  </div></header>
