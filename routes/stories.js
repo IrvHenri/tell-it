@@ -33,11 +33,11 @@ module.exports = (db) => {
         retObj.story = data.rows[0];
         db.query(
           `
-          SELECT contributions.*, users.username , users.avatar 
+          SELECT contributions.*, users.username , users.avatar
           FROM contributions
-          JOIN users ON users.id = user_id
+          JOIN users ON users.id = contributions.user_id
           WHERE story_id = $1
-          ORDER BY created_at;
+          ORDER BY created_at
           `,
           [req.params.storyId]
         )
