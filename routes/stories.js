@@ -36,7 +36,8 @@ module.exports = (db) => {
           SELECT contributions.*, users.username
           FROM contributions
           JOIN users ON users.id = user_id
-          WHERE story_id = $1;
+          WHERE story_id = $1
+          ORDER BY created_at;
           `,[req.params.storyId]
         )
           .then((data) => {

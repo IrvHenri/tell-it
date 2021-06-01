@@ -4,8 +4,6 @@ const escape = function (str) {
   return div.innerHTML;
 };
 
-const createDetailedStory = (story) => {};
-
 const createStory = (story) => {
   const { title, avatar, initial_content, created_at, username, id } = story;
   const safeTitle = escape(title);
@@ -29,7 +27,7 @@ const createStory = (story) => {
 };
 
 const createContribution = (contribution) => {
-  const { content, created_at, username, upvotes } = contribution;
+  const {id, content, created_at, username, upvotes } = contribution;
   const $contribution = $(`<article class='contribution'>
   <p>Upvotes: ${upvotes}</p>
   <header>${username}</header>
@@ -38,7 +36,7 @@ const createContribution = (contribution) => {
     ${timeago.format(created_at)}
     <div class= contribution-btn-container-div>
       <i class="fas fa-check-circle"></i>
-      <button class='upvote-btn'>
+      <button data-id = ${id} class='upvote-btn'>
         <i class="fas fa-arrow-up"></i>
       </button>
     </div>

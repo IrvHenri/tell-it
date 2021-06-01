@@ -21,7 +21,7 @@ $(() => {
     e.preventDefault();
     const title = $("#title").val();
     const initial_content = $("#initial_content").val();
-    const user_id = localStorage.user_id;
+    const user_id = localStorage.getItem("user_id");
     $.modal.close();
     $.post("/stories", { user_id, title, initial_content })
       .then(loadHomePage)
@@ -58,7 +58,7 @@ $(() => {
 
     $(document).on("click", ".submit-contribution", () => {
       const content = $("#content").val();
-      const user_id = localStorage.user_id;
+      const user_id = localStorage.getItem("user_id");
       $.post(`/stories/${story_id}/contribution`, {
         user_id,
         story_id,
