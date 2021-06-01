@@ -97,8 +97,18 @@ const randomColor = () => {
   return colors[randomNum];
 };
 
-const createContribution = (contribution, index) => {
+const creatAcceptContributionBtn = (id) => {
+  return`
+  <button data-id = ${id}>
+    <i class="fas fa-check-circle"></i>
+    <p>Accept Contribution</p>
+  </button>
+  `
+}
+
+const createContribution = (contribution, index, author_id) => {
   const { id, avatar, content, created_at, username, upvotes } = contribution;
+  const user_id = localStorage.getItem('user_id')
   const $contribution = $(`<article class='contribution'>
   <h5>Upvotes:
   <span class='upvote-count'>${upvotes}</span>
@@ -109,8 +119,8 @@ const createContribution = (contribution, index) => {
   <p>${content}</p>
   <footer>
     ${timeago.format(created_at)}
-    <div class= contribution-btn-container-div>
-      <i class="fas fa-check-circle"></i>
+    <div class='contribution-btn-container' <div>
+      ${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
       <button data-id = ${id} class='upvote-btn'>
         <i class="fas fa-arrow-up"></i>
       </button>
@@ -135,12 +145,13 @@ const renderViewedStory = (story, tab, isAuthor) => {
   $(tab).append(createViewedStory(story, isAuthor));
 };
 
-const renderContributions = (contributions, tab) => {
+const renderContributions = (contributions, tab, author_id) => {
+  console.log(author_id)
   $(tab).empty();
   contributions.map((contribution, index) => {
     $.ajax(`/contributions/${contribution.id}/upvotes`).then((data) => {
       contribution.upvotes = data.count;
-      $(tab).append(createContribution(contribution, index));
+      $(tab).append(createContribution(contribution, index, author_id));
     });
   });
 };
@@ -150,10 +161,10 @@ const isAuthorView = (story, contributions, contributionWidget) => {
   if (user_id === story.user_id) {
     $(".content-container").prepend(contributionWidget);
     renderViewedStory(story, ".content-container", true);
-    renderContributions(contributions, ".contribution-container");
+    renderContributions(contributions, ".contribution-container", story.user_id);
   } else {
     $(".content-container").prepend(contributionWidget);
-    renderContributions(contributions, ".contribution-container");
+    renderContributions(contributions, ".contribution-container", story.user_id);
     renderViewedStory(story, ".content-container", false);
   }
 };

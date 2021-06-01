@@ -51,8 +51,21 @@ module.exports = (db) => {
       .catch((err) => console.log(err));
   });
 
+  //Route that gets author by storyID
+  router.get("/:story_id/author", (req, res) => {
+    db.query(
+      `
+        SELECT * FROM users
+        JOIN stories ON user_id = users.id
+        WHERE stories.id = $1
+      `,[req.params.story_id]
+    )
+    .then(data => res.json(data.rows[0]))
+    .catch(err => res.status(400).json(err))
+  })
+
   //Gets all accepted contributions for story, and orders by c
-  router.get("/story_id/acceptedContributions", (req, res) => {
+  router.get("/:story_id/acceptedContributions", (req, res) => {
     db.query(
       `
       SELECT * FROM contributions
