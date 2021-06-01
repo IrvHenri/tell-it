@@ -41,7 +41,7 @@ $(() => {
           $(".content-container").empty();
           $(".content-container").prepend($contributionWidget);
           renderViewedStory(story, ".content-container", false);
-          renderContributions(contributions, ".contribution-container");
+          renderContributions(contributions, ".contribution-container", story.user_id);
         });
       });
     });

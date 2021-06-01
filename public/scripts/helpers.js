@@ -107,7 +107,7 @@ const creatAcceptContributionBtn = (id) => {
   `
 }
 
-const createContribution = (contribution, index) => {
+const createContribution = (contribution, index, author_id) => {
   const { id, avatar, content, created_at, username, upvotes } = contribution;
   const user_id = localStorage.getItem('user_id')
   const $contribution = $(`<article class='contribution'>
@@ -120,7 +120,8 @@ const createContribution = (contribution, index) => {
   <p>${content}</p>
   <footer>
     ${timeago.format(created_at)}
-    <div class='contribution-btn-container' <div>
+    <div class='contribution-btn-container'<div>
+      ${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
       <button data-id = ${id} class='upvote-btn'>
         <i class="fas fa-arrow-up"></i>
       </button>
@@ -161,9 +162,9 @@ const isAuthorView = (story, contributions, contributionWidget) => {
   $(".content-container").prepend(contributionWidget);
   if (user_id === story.user_id) {
     renderViewedStory(story, ".content-container", true);
-    renderContributions(contributions, ".contribution-container");
+    renderContributions(contributions, ".contribution-container", story.user_id);
   } else {
-    renderContributions(contributions, ".contribution-container");
+    renderContributions(contributions, ".contribution-container", story.user_id);
     renderViewedStory(story, ".content-container", false);
   }
 };
