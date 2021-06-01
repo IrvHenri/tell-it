@@ -37,7 +37,8 @@ module.exports = (db) => {
           FROM contributions
           JOIN users ON users.id = contributions.user_id
           WHERE story_id = $1
-          ORDER BY created_at
+          AND contributions.is_accepted = 'not reviewed'
+          ORDER BY created_at;
           `,
           [req.params.storyId]
         )
