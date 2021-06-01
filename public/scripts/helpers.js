@@ -29,13 +29,18 @@ const createStory = (story) => {
 };
 
 const createContribution = (contribution) => {
-  const { content, created_at, username } = contribution;
+  const { content, created_at, username, upvote_count } = contribution;
   const $contribution = $(`<article class='contribution'>
+  <p>Upvotes: ${upvote_count}</p>
   <header>${username}</header>
   <p>${content}</p>
-  <footer>${timeago.format(
-    created_at
-  )}<div><i class="fas fa-check-circle"></i><i class="fas fa-arrow-up"></i></div></footer>
+  <footer>
+    ${timeago.format(created_at)}
+    <div class= contribution-btn-container-div>
+      <i class="fas fa-check-circle"></i>
+      <i class="fas fa-arrow-up"></i>
+    </div>
+  </footer>
   </article>`);
 
   return $contribution;
