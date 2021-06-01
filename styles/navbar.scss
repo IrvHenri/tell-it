@@ -4,16 +4,19 @@
   width: 100%;
   background-color: rgb(17, 93, 104);
   display: flex;
+  position: fixed;
   align-items: center;
   justify-content: space-between;
   padding: 0 5em;
-  margin-bottom: 4em;
 }
 
-.navbar h1{
+.navbar h1 {
   color: aliceblue;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-.login-error{
+.login-error {
   color: red;
 }

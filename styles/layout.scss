@@ -21,6 +21,7 @@ $home-page-bg-color: #72d4f5;
 $story-page-bg-color: #047cac;
 $user-stories-bg-color: #9ad2a9;
 $primary-bg-color: #f5f5f5;
+$primart-text-color: #232b2b;
 $box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
   0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
   0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
@@ -31,7 +32,6 @@ body {
   background-image: url("../public/imgs/v661-tk-24-watercolorpattern.jpg");
   h1 {
     font-family: "Gloria Hallelujah", cursive;
-    text-align: center;
     font-size: 4rem;
   }
   font-family: "Source Sans Pro", sans-serif;
@@ -59,11 +59,11 @@ button {
 ================ */
 
 .app-container {
-  margin-top: 3em;
   width: 75%;
   min-width: 375px;
-  max-width: 1000px;
+  max-width: 975px;
   margin: 0 auto;
+  margin-top: 13rem;
 }
 .content-container {
   display: flex;
@@ -150,13 +150,14 @@ button {
   background: $story-page-bg-color !important;
 }
 
-.create-modal {
+.modal-content {
   h2 {
     text-align: center;
+    color: #fff;
+    font-size: 1.8rem;
     font-family: "Gloria Hallelujah", cursive !important;
   }
 }
-
 .create-story-form {
   display: flex;
   flex-direction: column;
@@ -176,7 +177,7 @@ button {
     resize: none;
   }
   button {
-    padding: 0.3em 0.7em;
+    padding: 0.3em 0.8em;
     border: 0;
     border-radius: 5px;
     background-color: $primary-btn-color;
@@ -193,6 +194,7 @@ button {
   background: $primary-bg-color;
   box-shadow: $box-shadow;
   width: 85%;
+  min-width: 350px;
   max-width: 550px;
   border-radius: 5px;
   margin-top: 2em;
@@ -233,8 +235,9 @@ button {
   padding: 1em;
   border-radius: 10px;
   h2 {
+    color: $primart-text-color;
     padding: 0.3em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
   }
 
   form {
@@ -245,9 +248,12 @@ button {
     resize: none;
     padding: 0.5em;
     border-radius: 10px;
+    outline: 0;
   }
   button {
+    min-width: 75px;
     width: 30%;
+    margin-top: 0.5em;
     margin-right: auto;
   }
 }
@@ -301,11 +307,13 @@ button {
     button {
       display: flex;
       justify-content: center;
+      align-items: center;
       width: 50%;
       background: 0;
     }
     i {
       transition: 200ms ease-in;
+      margin-left: 0.3em;
       &:hover {
         transform: scale(1.2);
       }

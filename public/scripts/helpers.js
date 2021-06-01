@@ -101,8 +101,7 @@ const creatAcceptContributionBtn = (id) => {
   //${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
   return `
   <button data-id = ${id}>
-    <i class="fas fa-check-circle"></i>
-    <p>Accept Contribution</p>
+   Accept <i class="fas fa-check-circle"></i>
   </button>
   `;
 };
@@ -118,10 +117,10 @@ const createContribution = (contribution, author_id) => {
   <p>${content}</p>
   <footer>
     ${timeago.format(created_at)}
-    <div class='contribution-btn-container'<div>
+    <div class='contribution-btn-container'>
       ${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
       <button data-id = ${id} class='upvote-btn'>
-        <i class="fas fa-arrow-up"></i>
+       upvote <i class="fas fa-arrow-up"></i>
       </button>
     </div>
   </footer>
