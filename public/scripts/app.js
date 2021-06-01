@@ -62,7 +62,7 @@ $(() => {
       $.post(`/stories/${story_id}/contribution`, {
         user_id,
         story_id,
-        content,
+        content
       }).then(() => {
         $(".contribution-widget textarea").val("");
         $.ajax(`/stories/${story_id}`).then((data) => {

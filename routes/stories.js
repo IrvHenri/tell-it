@@ -33,14 +33,11 @@ module.exports = (db) => {
         retObj.story = data.rows[0];
         db.query(
           `
-        SELECT contributions.*, users.username, COUNT(upvotes.*) as upvote_count
-        FROM contributions
-        JOIN users ON users.id = contributions.user_id
-        JOIN upvotes ON contribution_id = contributions.id
-        WHERE story_id = $1
-        GROUP BY contributions.id, users.username;
-        `,
-          [req.params.storyId]
+          SELECT contributions.*, users.username
+          FROM contributions
+          JOIN users ON users.id = user_id
+          WHERE story_id = $1;
+          `,[req.params.storyId]
         )
           .then((data) => {
             retObj.contributions = data.rows;

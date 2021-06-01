@@ -29,16 +29,18 @@ const createStory = (story) => {
 };
 
 const createContribution = (contribution) => {
-  const { content, created_at, username, upvote_count } = contribution;
+  const { content, created_at, username, upvotes } = contribution;
   const $contribution = $(`<article class='contribution'>
-  <p>Upvotes: ${upvote_count}</p>
+  <p>Upvotes: ${upvotes}</p>
   <header>${username}</header>
   <p>${content}</p>
   <footer>
     ${timeago.format(created_at)}
     <div class= contribution-btn-container-div>
       <i class="fas fa-check-circle"></i>
-      <i class="fas fa-arrow-up"></i>
+      <button class='upvote-btn'>
+        <i class="fas fa-arrow-up"></i>
+      </button>
     </div>
   </footer>
   </article>`);
@@ -59,6 +61,10 @@ const renderStory = (story, tab) => {
 const renderContributions = (contributions, tab) => {
   $(tab).empty();
   contributions.map((contribution) => {
-    $(tab).append(createContribution(contribution));
+    $.ajax(`/contributions/${contribution.id}/upvotes`)
+    .then(data => {
+      contribution.upvotes = data.count
+      $(tab).append(createContribution(contribution));
+    })
   });
 };
