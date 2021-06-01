@@ -39,7 +39,7 @@ $(() => {
           const { story, contributions } = data;
           $(".content-container").empty();
           $(".content-container").prepend($contributionWidget);
-          renderStory(story, ".content-container");
+          renderViewedStory(story, ".content-container", false);
           renderContributions(contributions, ".contribution-container");
         });
       });
