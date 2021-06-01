@@ -63,6 +63,29 @@ button {
   min-height: 75vh;
   background: $home-page-bg-color;
   box-shadow: $box-shadow;
+  padding: 2em;
+}
+
+.view-story-container {
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2em;
+  .story-article {
+    margin-top: 0;
+    width: 50%;
+  }
+  .side-bar {
+    width: 45%;
+  }
+  .text-field {
+    width: 100%;
+  }
+}
+.view-user-page {
+  background: $user-stories-bg-color;
 }
 
 // Main Tab headers
@@ -155,6 +178,7 @@ button {
 // story article
 .story-article {
   background: $primary-bg-color;
+  box-shadow: $box-shadow;
   width: 85%;
   max-width: 550px;
   border-radius: 5px;
@@ -190,24 +214,6 @@ button {
 }
 
 // Story Tab
-
-.view-story-container {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 2em;
-  .story-article {
-    margin-top: 0;
-    width: 50%;
-  }
-  .side-bar {
-    width: 45%;
-  }
-  .text-field {
-    width: 100%;
-  }
-}
 
 .contribution-widget {
   background: $story-page-bg-color;
@@ -272,20 +278,24 @@ button {
       font-weight: 600;
     }
   }
-  .contribution-icons {
+  .contribution-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     &:hover {
       cursor: pointer;
     }
+    button {
+      display: flex;
+      justify-content: center;
+      width: 50%;
+      background: 0;
+    }
     i {
       transition: 200ms ease-in;
-      margin-left: 0.7em;
       &:hover {
         transform: scale(1.2);
       }
     }
   }
-}
-
-.user-page {
-  background: $user-stories-bg-color;
 }

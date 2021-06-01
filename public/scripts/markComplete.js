@@ -8,6 +8,7 @@ $(() => {
           .then((data) => {
             const { story } = data;
             $(".content-container").empty();
+            $(".content-container").removeClass("view-story-container");
             renderViewedStory(story, ".content-container", false);
           })
           .catch((e) => console.log(e));
