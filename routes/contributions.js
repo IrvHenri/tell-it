@@ -14,8 +14,22 @@ module.exports = (db) => {
       });
   });
 
+  router.get('/:contribution_id/upvotes', (req, res) => {
+    db.query(
+      `
+      SELECT COUNT(*) FROM upvotes
+      WHERE contribution_id = $1
+      `,[req.params.contribution_id]
+    )
+    .then(data => {
+      res.json(data.rows[0])
+    })
+    .catch(err => res.status(400).json({error: err}))
+  })
+
+
   //Author Accepts Contribution
-  router.get('/:contribution_id', (req, res) => {
+  router.put('/:contribution_id', (req, res) => {
     //Check if contribution's status is not_reviewed
     db.query(`
     SELECT id, story_id, is_accepted

@@ -4,8 +4,6 @@ const escape = function (str) {
   return div.innerHTML;
 };
 
-const createDetailedStory = (story) => {};
-
 const createStory = (story) => {
   const { title, avatar, initial_content, created_at, username, id } = story;
   const safeTitle = escape(title);
@@ -42,13 +40,20 @@ const randomColor = () => {
 };
 
 const createContribution = (contribution) => {
-  const { content, created_at, username, avatar } = contribution;
+  const {id, content, created_at, username, upvotes } = contribution;
   const $contribution = $(`<article class='contribution'>
-  <header>${username} <div> <img  src = ${avatar} alt = 'avatar' class = 'avatar'>  </div></header>
+  <p>Upvotes: ${upvotes}</p>
+  <header>${username}</header>
   <p>${content}</p>
-  <footer>${timeago.format(
-    created_at
-  )}<div class ='contribution-icons'><i class="fas fa-check-circle"></i><i class="fas fa-arrow-up"></i></div></footer>
+  <footer>
+    ${timeago.format(created_at)}
+    <div class= contribution-btn-container-div>
+      <i class="fas fa-check-circle"></i>
+      <button data-id = ${id} class='upvote-btn'>
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </div>
+  </footer>
   </article>`);
   $($contribution).css("background", randomColor());
   return $contribution;
@@ -67,6 +72,10 @@ const renderStory = (story, tab) => {
 const renderContributions = (contributions, tab) => {
   $(tab).empty();
   contributions.map((contribution) => {
-    $(tab).append(createContribution(contribution));
+    $.ajax(`/contributions/${contribution.id}/upvotes`)
+    .then(data => {
+      contribution.upvotes = data.count
+      $(tab).append(createContribution(contribution));
+    })
   });
 };

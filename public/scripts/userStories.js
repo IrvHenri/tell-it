@@ -8,7 +8,7 @@ $(() => {
   });
 
   const loadStoriesPage = () => {
-    const currUserId = localStorage.user_id;
+    const currUserId = localStorage.getItem("user_id");
     if (!currUserId) {
       $(".content-container").prepend(`
           <div>
