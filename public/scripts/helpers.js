@@ -98,6 +98,7 @@ const randomColor = () => {
 };
 
 const creatAcceptContributionBtn = (id) => {
+  //${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
   return`
   <button data-id = ${id}>
     <i class="fas fa-check-circle"></i>
@@ -106,7 +107,7 @@ const creatAcceptContributionBtn = (id) => {
   `
 }
 
-const createContribution = (contribution, index, author_id) => {
+const createContribution = (contribution, index) => {
   const { id, avatar, content, created_at, username, upvotes } = contribution;
   const user_id = localStorage.getItem('user_id')
   const $contribution = $(`<article class='contribution'>
@@ -120,7 +121,6 @@ const createContribution = (contribution, index, author_id) => {
   <footer>
     ${timeago.format(created_at)}
     <div class='contribution-btn-container' <div>
-      ${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
       <button data-id = ${id} class='upvote-btn'>
         <i class="fas fa-arrow-up"></i>
       </button>
@@ -146,7 +146,6 @@ const renderViewedStory = (story, tab, isAuthor) => {
 };
 
 const renderContributions = (contributions, tab, author_id) => {
-  console.log(author_id)
   $(tab).empty();
   contributions.map((contribution, index) => {
     $.ajax(`/contributions/${contribution.id}/upvotes`).then((data) => {
@@ -158,13 +157,13 @@ const renderContributions = (contributions, tab, author_id) => {
 
 const isAuthorView = (story, contributions, contributionWidget) => {
   const user_id = Number(localStorage.user_id);
+  //console.log(contributions)
+  $(".content-container").prepend(contributionWidget);
   if (user_id === story.user_id) {
-    $(".content-container").prepend(contributionWidget);
     renderViewedStory(story, ".content-container", true);
-    renderContributions(contributions, ".contribution-container", story.user_id);
+    renderContributions(contributions, ".contribution-container");
   } else {
-    $(".content-container").prepend(contributionWidget);
-    renderContributions(contributions, ".contribution-container", story.user_id);
+    renderContributions(contributions, ".contribution-container");
     renderViewedStory(story, ".content-container", false);
   }
 };

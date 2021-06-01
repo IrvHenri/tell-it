@@ -1,5 +1,5 @@
 $(() => {
-  $(document).on("click", ".view-story-btn", function (e) {
+  $('.content-container').on("click", ".view-story-btn", function (e) {
     $(".content-container").empty();
     $(".content-container").addClass("view-story-container");
     const story_id = $(this).closest("article[data-id]").attr("data-id");
@@ -14,7 +14,7 @@ $(() => {
       </div>
     </div>
       `);
-    $.ajax(`/stories/${story_id}`)
+    $.get(`/stories/${story_id}`)
       .then((data) => {
         const { story, contributions } = data;
         if (story.is_complete) {
@@ -25,17 +25,14 @@ $(() => {
       })
       .catch((err) => console.log(err));
 
-    $(document).on("click", ".submit-contribution", () => {
+    $('.content-container').on("click", ".submit-contribution", () => {
       const content = $("#content").val();
       const user_id = localStorage.getItem("user_id");
-      //Potential bug here? odd behavour after post
-      $.post(`/stories/${story_id}/contribution`, {
-        user_id,
-        story_id,
-        content,
-      }).then(() => {
+      $.post(`/stories/${story_id}/contribution`, {user_id, story_id, content})
+      .then(() => {
         $(".contribution-widget textarea").val("");
-        $.ajax(`/stories/${story_id}`).then((data) => {
+        $.get(`/stories/${story_id}`)
+        .then((data) => {
           const { story, contributions } = data;
           $(".content-container").empty();
           $(".content-container").prepend($contributionWidget);
