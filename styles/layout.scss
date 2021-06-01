@@ -146,15 +146,15 @@ button {
   }
 }
 
+.modal {
+  background: $story-page-bg-color !important;
+}
+
 .create-modal {
   h2 {
     text-align: center;
-    font-family: "Gloria Hallelujah", cursive;
+    font-family: "Gloria Hallelujah", cursive !important;
   }
-}
-
-.modal {
-  background: yellow !important;
 }
 
 .create-story-form {
@@ -167,6 +167,10 @@ button {
   textarea {
     width: 75%;
     padding: 0.5em;
+    margin-bottom: 0.5em;
+    border: 0;
+    border-radius: 8px;
+    font-size: 1.2em;
   }
   textarea {
     resize: none;
@@ -261,7 +265,7 @@ button {
     font-weight: 600;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     .avatar {
       margin-left: 0.5em;
       width: 25px;

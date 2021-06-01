@@ -26,7 +26,11 @@ $(() => {
     const user_id = localStorage.getItem("user_id");
     $.modal.close();
     $.post("/stories", { user_id, title, initial_content })
-      .then(loadHomePage)
+      .then(() => {
+        $(".create-story-form input").val("");
+        $(".create-story-form textarea").val("");
+        loadHomePage;
+      })
       .catch((err) => console.log(err));
   });
 

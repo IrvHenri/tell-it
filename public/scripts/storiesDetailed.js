@@ -1,6 +1,7 @@
 $(() => {
-  $('.content-container').on("click", ".view-story-btn", function (e) {
+  $(".content-container").on("click", ".view-story-btn", function (e) {
     $(".content-container").empty();
+    $(".content-container").removeClass("view-user-page");
     $(".content-container").addClass("view-story-container");
     const story_id = $(this).closest("article[data-id]").attr("data-id");
     let $contributionWidget = $(`
@@ -14,6 +15,7 @@ $(() => {
       </div>
     </div>
       `);
+
     $.get(`/stories/${story_id}`)
       .then((data) => {
         const { story, contributions } = data;
@@ -28,20 +30,27 @@ $(() => {
       .catch((err) => console.log(err));
 
     //Remove old event handler
-    $('.content-container').off("click", ".submit-contribution");
-    $('.content-container').on("click", ".submit-contribution", () => {
+    $(".content-container").off("click", ".submit-contribution");
+    $(".content-container").on("click", ".submit-contribution", () => {
+      $(".contribution-widget textarea").prop("required", "true"); // not working
       const content = $("#content").val();
       const user_id = localStorage.getItem("user_id");
-      $.post(`/stories/${story_id}/contribution`, {user_id, story_id, content})
-      .then(() => {
+      $.post(`/stories/${story_id}/contribution`, {
+        user_id,
+        story_id,
+        content,
+      }).then(() => {
         $(".contribution-widget textarea").val("");
-        $.get(`/stories/${story_id}`)
-        .then((data) => {
+        $.get(`/stories/${story_id}`).then((data) => {
           const { story, contributions } = data;
           $(".content-container").empty();
           $(".content-container").prepend($contributionWidget);
           renderViewedStory(story, ".content-container", false);
-          renderContributions(contributions, ".contribution-container", story.user_id);
+          renderContributions(
+            contributions,
+            ".contribution-container",
+            story.user_id
+          );
         });
       });
     });
