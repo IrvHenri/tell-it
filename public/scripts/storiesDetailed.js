@@ -1,8 +1,6 @@
 $(() => {
   $(document).on("click", ".view-story-btn", function (e) {
     $(".content-container").empty();
-    //Add View story styling
-
     $(".content-container").addClass("view-story-container");
     const story_id = $(this).closest("article[data-id]").attr("data-id");
     let $contributionWidget = $(`
@@ -19,16 +17,18 @@ $(() => {
     $.ajax(`/stories/${story_id}`)
       .then((data) => {
         const { story, contributions } = data;
-        $(".content-container").prepend($contributionWidget);
-        renderStory(story, ".content-container");
-        renderMarkCompleteBtn(story);
-        renderContributions(contributions, ".contribution-container");
+        if (story.is_complete) {
+          renderViewedStory(story, ".content-container", false);
+        } else {
+          isAuthorView(story, contributions, $contributionWidget);
+        }
       })
       .catch((err) => console.log(err));
 
     $(document).on("click", ".submit-contribution", () => {
       const content = $("#content").val();
       const user_id = localStorage.getItem("user_id");
+      //Potential bug here? odd behavour after post
       $.post(`/stories/${story_id}/contribution`, {
         user_id,
         story_id,

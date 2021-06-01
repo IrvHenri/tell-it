@@ -144,3 +144,16 @@ const renderContributions = (contributions, tab) => {
     });
   });
 };
+
+const isAuthorView = (story, contributions, contributionWidget) => {
+  const user_id = Number(localStorage.user_id);
+  if (user_id === story.user_id) {
+    $(".content-container").prepend(contributionWidget);
+    renderViewedStory(story, ".content-container", true);
+    renderContributions(contributions, ".contribution-container");
+  } else {
+    $(".content-container").prepend(contributionWidget);
+    renderContributions(contributions, ".contribution-container");
+    renderViewedStory(story, ".content-container", false);
+  }
+};

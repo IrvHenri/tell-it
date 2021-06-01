@@ -121,9 +121,9 @@ button {
   }
 }
 
-// .modal {
-//   background: yellow !important;
-// }
+.modal {
+  background: yellow !important;
+}
 
 .create-story-form {
   display: flex;
@@ -209,7 +209,7 @@ button {
   }
 }
 
-.contribution-form {
+.contribution-widget {
   background: $story-page-bg-color;
   padding: 1em;
   border-radius: 10px;
