@@ -95,6 +95,7 @@ module.exports = (db) => {
 
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
+    console.log("IN POST ROUTE")
     let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
     console.log(req.body);
     const { user_id, story_id, content } = req.body;

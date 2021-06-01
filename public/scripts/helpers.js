@@ -148,7 +148,7 @@ const renderViewedStory = (story, tab, isAuthor) => {
 const renderContributions = (contributions, tab, author_id) => {
   $(tab).empty();
   contributions.map((contribution, index) => {
-    $.ajax(`/contributions/${contribution.id}/upvotes`).then((data) => {
+    $.get(`/contributions/${contribution.id}/upvotes`).then((data) => {
       contribution.upvotes = data.count;
       $(tab).append(createContribution(contribution, index, author_id));
     });

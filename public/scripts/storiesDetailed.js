@@ -27,6 +27,8 @@ $(() => {
       })
       .catch((err) => console.log(err));
 
+    //Remove old event handler
+    $('.content-container').off("click", ".submit-contribution");
     $('.content-container').on("click", ".submit-contribution", () => {
       const content = $("#content").val();
       const user_id = localStorage.getItem("user_id");

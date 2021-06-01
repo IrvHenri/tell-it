@@ -3,7 +3,7 @@ $(() => {
 
   const loadHomePage = () => {
     $(".content-container").empty();
-    $.ajax("/stories")
+    $.get("/stories")
       .then((data) => {
         let stories = data.stories;
         renderStories(stories, ".content-container");
