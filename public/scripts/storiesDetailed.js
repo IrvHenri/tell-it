@@ -36,7 +36,7 @@ $(() => {
           // Bug with this condition - user can only see contributions and not story
           // if i take out $(".content-container").prepend($contributionForm);
           // and change renderContributions(contributions, ".content-container");
-          // story will not appear
+          // story will not appear at all
           $(".content-container").prepend($contributionForm);
           renderViewedStory(story, ".content-container", true);
           renderContributions(contributions, ".contribution-container");

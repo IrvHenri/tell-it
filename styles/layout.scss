@@ -60,6 +60,7 @@ button {
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
+  min-height: 75vh;
   background: $home-page-bg-color;
   box-shadow: $box-shadow;
 }
@@ -93,10 +94,10 @@ button {
 .create-story-btn {
   display: block;
   position: fixed;
-  bottom: 20px;
+  bottom: 45px;
   right: 180px;
   z-index: 99;
-  background: $secondary-btn-color;
+  background: $story-page-bg-color;
   color: #fff;
   border: 0;
   width: 70px;
@@ -104,7 +105,7 @@ button {
   border-radius: 50%;
   transition: 200ms ease-in;
   &:hover {
-    background: darken($secondary-btn-color, 5%);
+    background: darken($story-page-bg-color, 5%);
     cursor: pointer;
   }
   i {
@@ -120,9 +121,9 @@ button {
   }
 }
 
-.modal {
-  background: yellow !important;
-}
+// .modal {
+//   background: yellow !important;
+// }
 
 .create-story-form {
   display: flex;
