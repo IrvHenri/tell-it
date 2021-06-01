@@ -3,23 +3,81 @@ const escape = function (str) {
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 };
+const createViewedStory = (story, isAuthor) => {
+  const {
+    title,
+    avatar,
+    initial_content,
+    created_at,
+    username,
+    id,
+    is_complete,
+  } = story;
+  const safeTitle = escape(title);
+  const safeContent = escape(initial_content);
+  if (isAuthor) {
+    const $story = $(`
+  <article class ='story-article' data-id= ${id}>
+  <header>
+  <h2>${safeTitle}</h2>
+
+   <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+  </header>
+
+  <p class ='story-content'> ${safeContent}</p>
+
+  <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
+      is_complete ? "Completed" : "In progress"
+    }</small></div> <button class = 'mark-complete-btn'>Mark Complete</button></footer>
+  </article>
+
+  `);
+    return $story;
+  }
+  const $story = $(`
+  <article class ='story-article' data-id= ${id}>
+  <header>
+  <h2>${safeTitle}</h2>
+
+   <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+  </header>
+
+  <p class ='story-content'> ${safeContent}</p>
+
+  <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
+    is_complete ? "Completed" : "In progress"
+  }</small></div> </footer>
+  </article>
+
+  `);
+  return $story;
+};
 
 const createStory = (story) => {
-  const { title, avatar, initial_content, created_at, username, id } = story;
+  const {
+    title,
+    avatar,
+    initial_content,
+    created_at,
+    username,
+    id,
+    is_complete,
+  } = story;
   const safeTitle = escape(title);
   const safeContent = escape(initial_content);
   const $story = $(`
   <article class ='story-article' data-id= ${id}>
   <header>
-  <h3> ${username}</h3>
-   <div> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
-  </header>
   <h2>${safeTitle}</h2>
+
+   <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+  </header>
+
   <p class ='story-content'> ${safeContent}</p>
 
-  <footer> <small>${timeago.format(
-    created_at
-  )} </small><button class = 'mark-complete-btn'>Mark Complete</button> <button class = 'view-story-btn' > View Story </button> </footer>
+  <footer>  <div><small>${timeago.format(created_at)} </small>/ <small>${
+    is_complete ? "Completed" : "In progress"
+  }</small></div>  <button class = 'view-story-btn' > View Story </button> </footer>
   </article>
 
   `);
@@ -39,11 +97,13 @@ const randomColor = () => {
   return colors[randomNum];
 };
 
-const createContribution = (contribution) => {
-  const {id, content, created_at, username, upvotes } = contribution;
+const createContribution = (contribution, index) => {
+  const { id, avatar, content, created_at, username, upvotes } = contribution;
   const $contribution = $(`<article class='contribution'>
   <p>Upvotes: ${upvotes}</p>
-  <header>${username}</header>
+  <header>Contribution #${
+    index + 1
+  }  <div><p>${username}</p> <img  src = ${avatar} alt = 'avatar' class = 'avatar'>  </div></header>
   <p>${content}</p>
   <footer>
     ${timeago.format(created_at)}
@@ -69,13 +129,16 @@ const renderStory = (story, tab) => {
   $(tab).append(createStory(story));
 };
 
+const renderViewedStory = (story, tab, isAuthor) => {
+  $(tab).append(createViewedStory(story, isAuthor));
+};
+
 const renderContributions = (contributions, tab) => {
   $(tab).empty();
-  contributions.map((contribution) => {
-    $.ajax(`/contributions/${contribution.id}/upvotes`)
-    .then(data => {
-      contribution.upvotes = data.count
-      $(tab).append(createContribution(contribution));
-    })
+  contributions.map((contribution, index) => {
+    $.ajax(`/contributions/${contribution.id}/upvotes`).then((data) => {
+      contribution.upvotes = data.count;
+      $(tab).append(createContribution(contribution, index));
+    });
   });
 };
