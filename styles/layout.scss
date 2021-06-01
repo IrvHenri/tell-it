@@ -50,24 +50,18 @@ button {
 
 .app-container {
   margin-top: 3em;
+  width: 75%;
+  min-width: 375px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 .content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
-  width: 75%;
-  max-width: 1000px;
   border-radius: 16px;
-  overflow: auto;
-  min-height: 50vh;
   background: $home-page-bg-color;
   box-shadow: $box-shadow;
-}
-
-.content-container article {
-  margin: 0 auto;
-  margin: 2em auto;
 }
 
 // Main Tab headers
@@ -78,21 +72,17 @@ button {
   #home-page {
     background: $home-page-bg-color;
   }
-  #story-page {
-    background: $story-page-bg-color;
-  }
-
   #user-page {
     background: $user-stories-bg-color;
   }
   li {
     font-size: 2rem;
+    font-weight: 600;
     list-style: none;
     border-bottom: 0;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    margin-left: 1em;
-    padding: 0.3em 0.8em;
+    padding: 0.2em 0.8em;
     &:hover {
       cursor: pointer;
     }
@@ -123,14 +113,15 @@ button {
   }
 }
 
-.modal {
-  background: yellow;
-}
 .create-modal {
-  h3 {
+  h2 {
     text-align: center;
     font-family: "Gloria Hallelujah", cursive;
   }
+}
+
+.modal {
+  background: yellow !important;
 }
 
 .create-story-form {
@@ -166,10 +157,15 @@ button {
   width: 85%;
   max-width: 550px;
   border-radius: 5px;
+  margin-top: 2em;
   padding: 1.5em;
   header {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+    }
   }
   .avatar {
     margin-left: 0.5em;
@@ -192,11 +188,6 @@ button {
   margin-top: 5em;
 }
 
-//TEMPORARY
-// .mark-complete-btn {
-//   display: none;
-// }
-
 // Story Tab
 
 .view-story-container {
@@ -217,7 +208,7 @@ button {
   }
 }
 
-.contribution-widget {
+.contribution-form {
   background: $story-page-bg-color;
   padding: 1em;
   border-radius: 10px;
@@ -233,7 +224,7 @@ button {
   textarea {
     resize: none;
     padding: 0.5em;
-    border-radius: 15px;
+    border-radius: 10px;
   }
   button {
     width: 30%;
@@ -243,6 +234,7 @@ button {
 
 .contribution {
   border-radius: 16px;
+  margin-top: 2em;
   padding: 1.5em;
   padding: 1em;
   transition: 200ms ease-in;
@@ -253,18 +245,31 @@ button {
     font-weight: 600;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     .avatar {
       margin-left: 0.5em;
       width: 25px;
       height: 25px;
     }
+    div {
+      display: flex;
+      align-items: center;
+      p {
+        border: 0;
+      }
+    }
   }
   p {
     padding: 1em 0;
+    border-bottom: 2px solid #244751;
   }
   footer {
     display: flex;
+    margin-top: 0.5em;
     justify-content: space-between;
+    small {
+      font-weight: 600;
+    }
   }
   .contribution-icons {
     &:hover {
