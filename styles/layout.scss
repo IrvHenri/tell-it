@@ -320,3 +320,25 @@ button {
     }
   }
 }
+
+.jump-btn {
+  display: none;
+  position: fixed;
+  bottom: 45px;
+  right: 60px;
+  z-index: 99;
+  background: #ff0000;
+  color: #fff;
+  border: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  transition: 200ms ease-in;
+  &:hover {
+    background: #ff00009c;
+    cursor: pointer;
+  }
+  i {
+    font-size: 2em;
+  }
+}

@@ -20,3 +20,15 @@
 .login-error {
   color: red;
 }
+
+.user-login {
+  display: flex;
+  align-items: center;
+  p {
+    font-weight: 600;
+    color: #35d461;
+  }
+  button {
+    margin-left: 1em;
+  }
+}
