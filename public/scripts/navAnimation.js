@@ -1,10 +1,10 @@
 $(document).ready(() => {
   const scrollFunction = () => {
-    if ($(document).scrollTop() > 20) {
-      $("nav").hide();
+    if ($(document).scrollTop() > 75) {
+      $("nav").slideUp(500);
       $(".jump-btn").show();
     } else {
-      $("nav").show();
+      $("nav").slideDown();
       $(".jump-btn").hide();
     }
   };

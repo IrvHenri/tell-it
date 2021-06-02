@@ -21,7 +21,7 @@ $home-page-bg-color: #72d4f5;
 $story-page-bg-color: #047cac;
 $user-stories-bg-color: #9ad2a9;
 $primary-bg-color: #f5f5f5;
-$primart-text-color: #232b2b;
+$primary-text-color: #232b2b;
 $box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
   0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
   0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
@@ -34,7 +34,7 @@ body {
     font-family: "Gloria Hallelujah", cursive;
     font-size: 4rem;
   }
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Signika", sans-serif;
   color: #232b2b;
 }
 
@@ -63,8 +63,11 @@ button {
   min-width: 375px;
   max-width: 950px;
   margin: 0 auto;
+  height: 85vh;
   margin-top: 14rem;
+  transition: 400ms ease-in;
 }
+
 .content-container {
   display: flex;
   flex-direction: column;
@@ -131,18 +134,24 @@ button {
     background: $user-stories-bg-color;
   }
   li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2rem;
     font-weight: 600;
     list-style: none;
     border-bottom: 0;
     text-align: center;
-    width: 43%;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    padding: 0.2em 0.8em;
+    padding: 0.4em 0.8em;
     padding-top: 0.5em;
     &:hover {
       cursor: pointer;
+    }
+    i {
+      margin-left: 0.5em;
+      color: $primary-text-color;
     }
   }
 }
@@ -151,10 +160,17 @@ button {
   .app-container {
     margin-top: 12rem;
   }
-
   .nav-tabs {
     li {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      width: 45%;
+      padding: 0.7em 0;
+    }
+  }
+}
+@media screen and (min-width: 750px) {
+  .nav-tabs {
+    li {
       width: 45%;
     }
   }
@@ -162,7 +178,8 @@ button {
 @media screen and (min-width: 800px) {
   .nav-tabs {
     li {
-      width: 33%;
+      width: 40%;
+      max-width: 300px;
     }
   }
 }
@@ -288,7 +305,7 @@ button {
   border-radius: 10px;
 
   h2 {
-    color: $primart-text-color;
+    color: $primary-text-color;
     padding: 0.3em;
     margin-bottom: 0.5em;
   }

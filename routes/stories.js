@@ -76,12 +76,12 @@ module.exports = (db) => {
       AND contributions.is_accepted = 'not reviewed'
       ORDER BY created_at;
     `,
-    [req.params.story_id]
+      [req.params.story_id]
     )
-    .then((data) => {
-      res.json(data.rows);
-    })
-    .catch((err) => console.log(err));
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => console.log(err));
   });
 
   //Gets all accepted contributions for story, and orders by c
@@ -115,42 +115,47 @@ module.exports = (db) => {
 
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
-    let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
-    const { user_id, story_id, content } = req.body;
-    let values = [user_id, story_id, content];
-    if(content) {
+    let query = `INSERT INTO contributions (user_id, story_id, content, created_at) VALUES ($1, $2, $3, $4) RETURNING *`;
+    const { user_id, story_id, content, created_at } = req.body;
+    let values = [user_id, story_id, content, created_at];
+    if (content) {
       db.query(query, values)
-      .then(() => {
-        res.status(204).json({ message: "Success" });
-      })
-      .catch((err) => res.status(500).json({ error: err.message }));
+        .then(() => {
+          res.status(204).json({ message: "Success" });
+        })
+        .catch((err) => res.status(500).json({ error: err.message }));
     } else {
-      res.status(500).json({error: "Contribution text cannot be empty."})
+      res.status(500).json({ error: "Contribution text cannot be empty." });
     }
   });
 
   // User marks story complete
   router.post("/:story_id", (req, res) => {
-    const {user_id, story_id } = req.body;
+    const { user_id, story_id } = req.body;
     db.query(
       `
       SELECT user_id FROM stories
       WHERE id = $1;
-      `,[story_id])
-      .then(data => {
-        if(data.rows[0].user_id === parseInt(user_id)){
-          let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
-          let story_idToInt = Number(story_id);
-          let values = [story_idToInt];
-          db.query(query, values)
-            .then(() => {
-              res.status(204).json({ message: "Success" });
-            })
-            .catch((err) => res.status(500).json({ error: err.message }));
-        } else {
-          res.status(403).json({error: "Users may only mark their own stories as complete."})
-        }
-      })
+      `,
+      [story_id]
+    ).then((data) => {
+      if (data.rows[0].user_id === parseInt(user_id)) {
+        let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
+        let story_idToInt = Number(story_id);
+        let values = [story_idToInt];
+        db.query(query, values)
+          .then(() => {
+            res.status(204).json({ message: "Success" });
+          })
+          .catch((err) => res.status(500).json({ error: err.message }));
+      } else {
+        res
+          .status(403)
+          .json({
+            error: "Users may only mark their own stories as complete.",
+          });
+      }
+    });
   });
   return router;
 };
