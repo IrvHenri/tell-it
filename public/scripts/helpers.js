@@ -162,24 +162,40 @@ const renderContributions = (contributions, tab, author_id) => {
 };
 
 const isAuthorView = (story, contributions, contributionWidget) => {
-  const user_id = Number(localStorage.user_id);
-  //console.log(contributions)
+  const user_id = localStorage.getItem("user_id");
   $(".content-container").prepend(contributionWidget);
-  if (user_id === story.user_id) {
-    renderViewedStory(story, ".content-container", true);
-    renderContributions(
-      contributions,
-      ".contribution-container",
-      story.user_id
-    );
-    //renderAcceptedStories(story.id)
+  if (story.is_complete) {
+    $.get(`/stories/${story.id}`)
+    .then((data) => {
+      const { story } = data;
+      $(".content-container").empty();
+      $(".content-container").removeClass("view-story-container");
+      renderViewedStory(story, ".content-container", false);
+    })
+    .then(() => {
+      $.get(`/stories/${story.id}/acceptedContributions`)
+      .then(data => {
+        data.map(data => {
+          $('.contributions-container').append(`<p>${data.content}</p>`)
+        })
+      })
+    })
+    .catch((e) => console.log(e));
   } else {
-    renderContributions(
-      contributions,
-      ".contribution-container",
-      story.user_id
-    );
-    renderViewedStory(story, ".content-container", false);
-    //renderAcceptedStories(story.id)
+    if (parseInt(user_id) === story.user_id) {
+      renderViewedStory(story, ".content-container", true);
+      renderContributions(
+        contributions,
+        ".contribution-container",
+        story.user_id
+      );
+    } else {
+      renderContributions(
+        contributions,
+        ".contribution-container",
+        story.user_id
+      );
+      renderViewedStory(story, ".content-container", false);
+    }
   }
 };
