@@ -29,8 +29,8 @@ $(() => {
       .then(() => {
         $(".create-story-form input").val("");
         $(".create-story-form textarea").val("");
-        loadHomePage;
       })
+      .then(loadHomePage)
       .catch((err) => console.log(err));
   });
 

@@ -11,10 +11,22 @@
 $(() => {
   $(".content-container").on('click', '.accept-contribution-btn', function(){
     //Needs a check to make sure user sending request is the real user on FE
+    //Also needs a TON of refactoring.
     const contribution_id = $(this).attr("data-id")
     $.post(`/contributions/${contribution_id}`)
     .then(() => {
       const story_id = $(this).closest(".content-container").children(".story-article").attr("data-id");
+      const $contributionWidget = $(`
+      <div class = 'side-bar'>
+      <div class= 'contribution-widget'>
+        <h2>Submit a contribution!</h2>
+        <textarea id ='content' name="content" class='text-field'  rows="4" cols="50" placeholder = "What happens next?" required ></textarea>
+          <button type="button" class = 'submit-contribution' >Submit</button>
+        </div>
+        <div data-id=${story_id} class ='contribution-container'>
+        </div>
+      </div>
+        `);
       $(".content-container").empty();
       $.get(`/stories/${story_id}`)
         .then((data) => {

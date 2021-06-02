@@ -100,8 +100,8 @@ const randomColor = () => {
 const creatAcceptContributionBtn = (id) => {
   return`
   <button class='accept-contribution-btn' data-id = ${id}>
+    Accept
     <i class="fas fa-check-circle"></i>
-    <p>Accept Contribution</p>
   </button>
   `;
 };
@@ -120,7 +120,7 @@ const createContribution = (contribution, author_id) => {
     <div class='contribution-btn-container'>
       ${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
       <button data-id = ${id} class='upvote-btn'>
-       upvote <i class="fas fa-arrow-up"></i>
+       Upvote <i class="fas fa-arrow-up"></i>
       </button>
     </div>
   </footer>
