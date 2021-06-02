@@ -64,7 +64,7 @@ button {
   max-width: 950px;
   margin: 0 auto;
   height: 85vh;
-  margin-top: 14rem;
+  margin-top: 12rem;
   transition: 400ms ease-in;
 }
 
@@ -73,10 +73,11 @@ button {
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
-  min-height: 75vh;
+  height: 70vh;
   background: $home-page-bg-color;
   box-shadow: $box-shadow;
   padding: 2em;
+  overflow: scroll;
 }
 
 .view-story-container {
@@ -114,7 +115,7 @@ button {
     }
   }
   .story-article:first-child {
-    margin-top: 2.5em !important;
+    margin-top: 1.5em !important;
   }
 }
 .view-user-page {
@@ -270,7 +271,7 @@ button {
     }
   }
   .avatar {
-    margin-left: 0.5em;
+    margin-right: 0.5em;
     width: 25px;
     height: 25px;
   }
@@ -343,7 +344,7 @@ button {
     align-items: center;
     justify-content: flex-end;
     .avatar {
-      margin-left: 0.5em;
+      margin-right: 0.5em;
       width: 25px;
       height: 25px;
     }

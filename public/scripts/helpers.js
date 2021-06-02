@@ -21,7 +21,7 @@ const createViewedStory = (story, isAuthor) => {
     <header>
     <h2>${safeTitle}</h2>
 
-     <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+     <div><img src = ${avatar} alt= 'avatar' class = 'avatar'><h3> ${username}</h3> </div>
     </header>
 
     <p class ='story-content'> ${safeContent}</p>
@@ -40,7 +40,7 @@ const createViewedStory = (story, isAuthor) => {
     <header>
     <h2>${safeTitle}</h2>
 
-     <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+     <div> <img src = ${avatar} alt= 'avatar' class = 'avatar'><h3> ${username}</h3> </div>
     </header>
 
     <p class ='story-content'> ${safeContent}</p>
@@ -71,7 +71,7 @@ const createStory = (story) => {
   <header>
   <h2>${safeTitle}</h2>
 
-   <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+   <div> <img src = ${avatar} alt= 'avatar' class = 'avatar'><h3> ${username}</h3> </div>
   </header>
 
   <p class ='story-content'> ${safeContent}</p>
@@ -114,7 +114,7 @@ const createContribution = (contribution, author_id) => {
   <h5>Upvotes:
   <span class='upvote-count'>${upvotes}</span>
   </h5>
-  <header> <div><p>${username}</p> <img  src = ${avatar} alt = 'avatar' class = 'avatar'>  </div></header>
+  <header> <div><img  src = ${avatar} alt = 'avatar' class = 'avatar'><p>${username}</p>  </div></header>
   <p>${content}</p>
   <footer>
    <small> ${timeago.format(created_at)} </small>
