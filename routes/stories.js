@@ -13,6 +13,7 @@ module.exports = (db) => {
     db.query(query)
       .then((data) => {
         const stories = data.rows;
+
         res.json({ stories });
       })
       .catch((err) => {
@@ -67,20 +68,23 @@ module.exports = (db) => {
       .catch((err) => res.status(400).json(err));
   });
 
-  router.get('/:storyId/Unreviewedcontributions', (req, res) => {
-    db.query(`
+  router.get("/:storyId/Unreviewedcontributions", (req, res) => {
+    db.query(
+      `
       SELECT contributions.*, users.username , users.avatar
       FROM contributions
       JOIN users ON users.id = contributions.user_id
       WHERE story_id = $1
       AND contributions.is_accepted = 'not reviewed'
       ORDER BY created_at;
-    `,[req.params.story_id])
-    .then((data) => {
-      res.json(data.rows);
-    })
-    .catch((err) => console.log(err));
-  })
+    `,
+      [req.params.story_id]
+    )
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => console.log(err));
+  });
 
   //Gets all accepted contributions for story, and orders by c
   router.get("/:story_id/acceptedContributions", (req, res) => {

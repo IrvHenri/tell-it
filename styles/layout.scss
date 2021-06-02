@@ -87,10 +87,31 @@ button {
     width: 50%;
   }
   .side-bar {
+    min-width: 300px;
     width: 45%;
   }
   .text-field {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 935px) {
+  .view-story-container {
+    flex-direction: column-reverse;
+    align-items: center;
+    .story-article {
+      margin-top: 2.5em;
+      width: 50%;
+    }
+    .side-bar {
+      margin-top: 4.5em;
+    }
+    .text-field {
+      width: 100%;
+    }
+  }
+  .story-article:first-child {
+    margin-top: 2.5em !important;
   }
 }
 .view-user-page {
@@ -102,6 +123,7 @@ button {
 .nav-tabs {
   display: flex;
   justify-content: space-evenly;
+  padding: 0;
   #home-page {
     background: $home-page-bg-color;
   }
@@ -109,16 +131,38 @@ button {
     background: $user-stories-bg-color;
   }
   li {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
     list-style: none;
     border-bottom: 0;
+    text-align: center;
+    width: 43%;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     padding: 0.2em 0.8em;
     padding-top: 0.5em;
     &:hover {
       cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .app-container {
+    margin-top: 12rem;
+  }
+
+  .nav-tabs {
+    li {
+      font-size: 1.5rem;
+      width: 45%;
+    }
+  }
+}
+@media screen and (min-width: 800px) {
+  .nav-tabs {
+    li {
+      width: 33%;
     }
   }
 }
@@ -195,7 +239,7 @@ button {
   background: $primary-bg-color;
   box-shadow: $box-shadow;
   width: 85%;
-  min-width: 350px;
+  min-width: 320px;
   max-width: 550px;
   border-radius: 5px;
   margin-top: 2em;
@@ -235,6 +279,7 @@ button {
   background: $story-page-bg-color;
   padding: 1em;
   border-radius: 10px;
+
   h2 {
     color: $primart-text-color;
     padding: 0.3em;

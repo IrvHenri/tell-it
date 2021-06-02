@@ -1,13 +1,35 @@
 .navbar {
   top: 0;
-  height: 100px;
+  height: 120px;
   width: 100%;
-  background-color: rgb(17, 93, 104);
+  background-color: #045c84;
   display: flex;
   position: fixed;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5em;
+  padding: 0 4em;
+}
+
+@media screen and (max-width: 575px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    height: 155px;
+    justify-content: center;
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+      padding: 0;
+    }
+    .user-login {
+      p {
+        font-size: 0.8em;
+      }
+      button {
+        font-size: 0.8em;
+      }
+    }
+  }
 }
 
 .navbar h1 {
@@ -24,9 +46,12 @@
 .user-login {
   display: flex;
   align-items: center;
+  padding: 0.5em;
+  background: #3c322d;
+  border-radius: 5px;
   p {
     font-weight: 600;
-    color: #35d461;
+    color: aliceblue;
   }
   button {
     margin-left: 1em;
