@@ -141,15 +141,8 @@ const renderStory = (story, tab) => {
 };
 
 const renderViewedStory = (story, tab, isAuthor) => {
-  //$.get(`/stories/${story.id}/acceptedContributions`)
   $(tab).append(createViewedStory(story, isAuthor));
 };
-
-// const renderAcceptedStories = (story) => {
-//   $.get(`/stories/${story.id}/acceptedContributions`)
-//   .then(data => console.log(data))
-//   //$('.contributions-container').append(data)
-// }
 
 const renderContributions = (contributions, tab, author_id) => {
   $(tab).empty();

@@ -31,7 +31,6 @@ $(() => {
         $(".create-story-form input").val("");
         $(".create-story-form textarea").val("");
       })
-      .then(loadHomePage)
       .catch((err) => console.log(err));
   });
 
