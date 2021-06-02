@@ -26,24 +26,5 @@ $(() => {
         }
       })
       .catch((err) => console.log(err));
-
-    //Remove old event handler
-    $('.content-container').off("click", ".submit-contribution");
-    $('.content-container').on("click", ".submit-contribution", () => {
-      const content = $("#content").val();
-      const user_id = localStorage.getItem("user_id");
-      $.post(`/stories/${story_id}/contribution`, {user_id, story_id, content})
-      .then(() => {
-        $(".contribution-widget textarea").val("");
-        $.get(`/stories/${story_id}`)
-        .then((data) => {
-          const { story, contributions } = data;
-          $(".content-container").empty();
-          $(".content-container").prepend($contributionWidget);
-          renderViewedStory(story, ".content-container", false);
-          renderContributions(contributions, ".contribution-container", story.user_id);
-        });
-      });
-    });
   });
 });
