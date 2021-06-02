@@ -133,18 +133,28 @@ module.exports = (db) => {
   });
 
   // User marks story complete
-
   router.post("/:story_id", (req, res) => {
-    let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
-    const { story_id } = req.body;
-    let story_idToInt = Number(story_id);
-    let values = [story_idToInt];
-
-    db.query(query, values)
-      .then(() => {
-        res.status(204).json({ message: "Success" });
+    const {user_id, story_id } = req.body;
+    db.query(
+      `
+      SELECT user_id FROM stories
+      WHERE id = $1;
+      `,[story_id])
+      .then(data => {
+        console.log(data.rows[0])
+        if(data.rows[0].user_id === parseInt(user_id)){
+          let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
+          let story_idToInt = Number(story_id);
+          let values = [story_idToInt];
+          db.query(query, values)
+            .then(() => {
+              res.status(204).json({ message: "Success" });
+            })
+            .catch((err) => res.status(500).json({ error: err.message }));
+        } else {
+          res.status(403).json({error: "Users may only mark their own stories as complete."})
+        }
       })
-      .catch((err) => res.status(500).json({ error: err.message }));
   });
   return router;
 };
