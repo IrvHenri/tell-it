@@ -165,14 +165,6 @@ const isAuthorView = (story, contributions, contributionWidget) => {
       $(".content-container").removeClass("view-story-container");
       renderViewedStory(story, ".content-container", false);
     })
-    .then(() => {
-      $.get(`/stories/${story.id}/acceptedContributions`)
-      .then(data => {
-        data.map(data => {
-          $('.contributions-container').append(`<p>${data.content}</p>`)
-        })
-      })
-    })
     .catch((e) => console.log(e));
   } else {
     if (parseInt(user_id) === story.user_id) {

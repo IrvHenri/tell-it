@@ -41,7 +41,7 @@ module.exports = (db) => {
     )
     .then(data => {
       if(data.rows[0].user_id === parseInt(req.body.user_id)){
-            //Check if contribution's status is not_reviewed
+        //Check if contribution's status is not_reviewed
         db.query(`
         SELECT id, story_id, is_accepted
         FROM contributions
@@ -82,6 +82,7 @@ module.exports = (db) => {
           res.status(403).json({error: "Users may only accept contributions to their own stories."})
         }
     })
+    .catch(err => console.log(err))
   })
 
   //Upvote Contribution

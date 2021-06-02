@@ -6,6 +6,9 @@ $(() => {
     $.post(`/stories/${story_id}/contribution`, {user_id, story_id, content})
     .then(() => {
       reRender(story_id)
-    });
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   });
 });

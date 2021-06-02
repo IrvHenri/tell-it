@@ -116,22 +116,17 @@ module.exports = (db) => {
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
     let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
-    console.log(req.body);
     const { user_id, story_id, content } = req.body;
-    console.log(
-      "user_id:",
-      user_id,
-      "story_id:",
-      story_id,
-      "content:",
-      content
-    );
     let values = [user_id, story_id, content];
-    db.query(query, values)
+    if(content) {
+      db.query(query, values)
       .then(() => {
         res.status(204).json({ message: "Success" });
       })
       .catch((err) => res.status(500).json({ error: err.message }));
+    } else {
+      res.status(500).json({error: "Contribution text cannot be empty."})
+    }
   });
 
   // User marks story complete
