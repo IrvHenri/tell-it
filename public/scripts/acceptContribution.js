@@ -30,14 +30,16 @@ $(() => {
       $(".content-container").empty();
       $.get(`/stories/${story_id}`)
         .then((data) => {
-          const { story, contributions } = data;
-          if (story.is_complete) {
-            $(".content-container").removeClass("view-user-page");
-            $(".content-container").removeClass("view-story-container");
-            renderViewedStory(story, ".content-container", false);
-          } else {
-            isAuthorView(story, contributions, $contributionWidget);
-          }
+          const { story, contributions } = data
+          isAuthorView(story, contributions, $contributionWidget);
+        })
+        .then(() => {
+          $.get(`/stories/${story_id}/acceptedContributions`)
+          .then(data => {
+            data.map(data => {
+              $('.contributions-container').append(`<p>${data.content}</p>`)
+            })
+          })
         })
         .catch((err) => console.log(err));
     })

@@ -85,7 +85,7 @@ module.exports = (db) => {
       `
       SELECT * FROM contributions
       WHERE story_id = $1 AND is_accepted = 'accepted'
-      ORDER BY accepted_at;
+      ORDER BY accepted_at ASC;
     `,
       [req.params.story_id]
     )

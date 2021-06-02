@@ -43,8 +43,14 @@ module.exports = (db) => {
         UPDATE contributions
         SET
         is_accepted = CASE
-          WHEN (contributions.id = $1 AND contributions.story_id = $2) THEN 'accepted'
-          WHEN (contributions.id <> $1 AND contributions.story_id = $2) THEN 'rejected'
+          WHEN
+            (contributions.id = $1
+            AND contributions.story_id = $2)
+            THEN 'accepted'
+          WHEN
+          (contributions.id <> $1
+            AND contributions.story_id = $2
+            AND is_accepted <> 'accepted') THEN 'rejected'
           ELSE is_accepted
         END,
         accepted_at = CASE

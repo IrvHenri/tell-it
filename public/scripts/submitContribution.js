@@ -1,6 +1,5 @@
 $(() => {
   $('.content-container').on("click", ".submit-contribution", function() {
-    console.log("TEST")
     const content = $("#content").val();
     const user_id = localStorage.getItem("user_id");
     const story_id = $(this).closest(".content-container").children(".story-article").attr("data-id");
@@ -25,7 +24,15 @@ $(() => {
         $(".content-container").prepend($contributionWidget);
         renderViewedStory(story, ".content-container", false);
         renderContributions(contributions, ".contribution-container", story.user_id);
-      });
+      })
+      .then(() => {
+        $.get(`/stories/${story_id}/acceptedContributions`)
+        .then(data => {
+          data.map(data => {
+            $('.contributions-container').append(`<p>${data.content}</p>`)
+          })
+        })
+      })
     });
   });
 });

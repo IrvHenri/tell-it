@@ -27,6 +27,14 @@ $(() => {
           isAuthorView(story, contributions, $contributionWidget);
         }
       })
+      .then(() => {
+        $.get(`/stories/${story_id}/acceptedContributions`)
+        .then(data => {
+          data.map(data => {
+            $('.contributions-container').append(`<p>${data.content}</p>`)
+          })
+        })
+      })
       .catch((err) => console.log(err));
   });
 });
