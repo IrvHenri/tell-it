@@ -33,6 +33,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
     />
+    <script type="text/javascript" src="/scripts/navAnimation.js"></script>
     <script type="text/javascript" src="/scripts/createStoryBtn.js"></script>
     <script type="text/javascript" src="/scripts/helpers.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -56,28 +57,29 @@
       </ul>
       <main class="content-container"></main>
       <div id="ex1" class="modal create-modal">
-        <h3>Tell a story!</h3>
-        <form method="POST" action="/stories" class="create-story-form">
-          <label for="title"></label>
-            Title:<input
+        <div class="modal-content">
+          <h2>Tell-it!</h2>
+          <form method="POST" action="/stories" class="create-story-form">
+            <input
               type="text"
               name="title"
               id="title"
               placeholder="title"
               required
-          /></label>
-          <textarea
-            name="initial_content"
-            id="initial_content"
-            cols="30"
-            rows="10"
-            placeholder="Once upon a time..."
-            required
-          ></textarea>
-          <button type="submit" class="create-story-submit">Submit</button>
-        </form>
+            />
+            <textarea
+              name="initial_content"
+              id="initial_content"
+              cols="30"
+              rows="10"
+              placeholder="Once upon a time..."
+              required
+            ></textarea>
+            <button type="submit" class="create-story-submit">Submit</button>
+          </form>
+        </div>
       </div>
-
+      <button class="jump-btn"><i class="fas fa-angle-double-up"></i></button>
       <span class="create-story-btn-container"></span>
     </div>
   </body>
