@@ -4,37 +4,18 @@ const escape = function (str) {
   return div.innerHTML;
 };
 const createViewedStory = (story, isAuthor) => {
-    const {
-      title,
-      avatar,
-      initial_content,
-      created_at,
-      username,
-      id,
-      is_complete,
-    } = story;
-    const safeTitle = escape(title);
-    const safeContent = escape(initial_content);
-    if (isAuthor) {
-      const $story = $(`
-    <article class ='story-article' data-id= ${id}>
-    <header>
-    <h2>${safeTitle}</h2>
-
-     <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
-    </header>
-
-    <p class ='story-content'> ${safeContent}</p>
-    <div class='contributions-container'>
-    </div>
-
-    <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
-        is_complete ? "Completed" : "In progress"
-      }</small></div> <button class = 'mark-complete-btn'>Mark Complete</button></footer>
-    </article>
-    `);
-      return $story;
-    }
+  const {
+    title,
+    avatar,
+    initial_content,
+    created_at,
+    username,
+    id,
+    is_complete,
+  } = story;
+  const safeTitle = escape(title);
+  const safeContent = escape(initial_content);
+  if (isAuthor) {
     const $story = $(`
     <article class ='story-article' data-id= ${id}>
     <header>
@@ -46,12 +27,31 @@ const createViewedStory = (story, isAuthor) => {
     <p class ='story-content'> ${safeContent}</p>
     <div class='contributions-container'>
     </div>
+
     <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
       is_complete ? "Completed" : "In progress"
-    }</small></div> </footer>
+    }</small></div> <button class = 'mark-complete-btn'>Mark Complete</button></footer>
     </article>
     `);
     return $story;
+  }
+  const $story = $(`
+    <article class ='story-article' data-id= ${id}>
+    <header>
+    <h2>${safeTitle}</h2>
+
+     <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+    </header>
+
+    <p class ='story-content'> ${safeContent}</p>
+    <div class='contributions-container'>
+    </div>
+    <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
+    is_complete ? "Completed" : "In progress"
+  }</small></div> </footer>
+    </article>
+    `);
+  return $story;
 };
 
 const createStory = (story) => {
@@ -99,7 +99,7 @@ const randomColor = () => {
 };
 
 const creatAcceptContributionBtn = (id) => {
-  return`
+  return `
   <button class='accept-contribution-btn' data-id = ${id}>
     Accept
     <i class="fas fa-check-circle"></i>
@@ -117,7 +117,7 @@ const createContribution = (contribution, author_id) => {
   <header> <div><p>${username}</p> <img  src = ${avatar} alt = 'avatar' class = 'avatar'>  </div></header>
   <p>${content}</p>
   <footer>
-    ${timeago.format(created_at)}
+   <small> ${timeago.format(created_at)} </small>
     <div class='contribution-btn-container'>
       ${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
       <button data-id = ${id} class='upvote-btn'>
@@ -159,13 +159,13 @@ const isAuthorView = (story, contributions, contributionWidget) => {
   $(".content-container").prepend(contributionWidget);
   if (story.is_complete) {
     $.get(`/stories/${story.id}`)
-    .then((data) => {
-      const { story } = data;
-      $(".content-container").empty();
-      $(".content-container").removeClass("view-story-container");
-      renderViewedStory(story, ".content-container", false);
-    })
-    .catch((e) => console.log(e));
+      .then((data) => {
+        const { story } = data;
+        $(".content-container").empty();
+        $(".content-container").removeClass("view-story-container");
+        renderViewedStory(story, ".content-container", false);
+      })
+      .catch((e) => console.log(e));
   } else {
     if (parseInt(user_id) === story.user_id) {
       renderViewedStory(story, ".content-container", true);

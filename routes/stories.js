@@ -101,9 +101,9 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const { title, initial_content, user_id } = req.body;
-    let query = `INSERT INTO stories (user_id, title,initial_content) VALUES ($1, $2 , $3) RETURNING *`;
-    let values = [user_id, title, initial_content];
+    const { title, initial_content, user_id, created_at } = req.body;
+    let query = `INSERT INTO stories (user_id, title,initial_content,created_at) VALUES ($1, $2 , $3, $4) RETURNING *`;
+    let values = [user_id, title, initial_content, created_at];
     db.query(query, values)
       .then(() => {
         res.status(204).json({ message: "Success" });

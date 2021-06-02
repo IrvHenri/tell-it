@@ -6,5 +6,5 @@ CREATE TABLE stories (
   title VARCHAR(255) NOT NULL,
   initial_content TEXT NOT NULL,
   is_complete BOOLEAN DEFAULT FALSE,
-  created_at DATE NOT NULL DEFAULT NOW()
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
