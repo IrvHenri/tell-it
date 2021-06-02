@@ -1,10 +1,9 @@
 $(() => {
-  $(".content-container").on("click", ".view-story-btn", function (e) {
-    $(".content-container").empty();
-    $(".content-container").removeClass("view-user-page");
-    $(".content-container").addClass("view-story-container");
-    const story_id = $(this).closest("article[data-id]").attr("data-id");
-    let $contributionWidget = $(`
+  $('.content-container').on("click", ".submit-contribution", function() {
+    const content = $("#content").val();
+    const user_id = localStorage.getItem("user_id");
+    const story_id = $(this).closest(".content-container").children(".story-article").attr("data-id");
+    const $contributionWidget = $(`
     <div class = 'side-bar'>
     <div class= 'contribution-widget'>
       <h2>Submit a contribution!</h2>
@@ -15,17 +14,16 @@ $(() => {
       </div>
     </div>
       `);
-
-    $.get(`/stories/${story_id}`)
+    $.post(`/stories/${story_id}/contribution`, {user_id, story_id, content})
+    .then(() => {
+      $(".contribution-widget textarea").val("");
+      $.get(`/stories/${story_id}`)
       .then((data) => {
         const { story, contributions } = data;
-        if (story.is_complete) {
-          $(".content-container").removeClass("view-user-page");
-          $(".content-container").removeClass("view-story-container");
-          renderViewedStory(story, ".content-container", false);
-        } else {
-          isAuthorView(story, contributions, $contributionWidget);
-        }
+        $(".content-container").empty();
+        $(".content-container").prepend($contributionWidget);
+        renderViewedStory(story, ".content-container", false);
+        renderContributions(contributions, ".contribution-container", story.user_id);
       })
       .then(() => {
         $.get(`/stories/${story_id}/acceptedContributions`)
@@ -35,6 +33,6 @@ $(() => {
           })
         })
       })
-      .catch((err) => console.log(err));
+    });
   });
 });

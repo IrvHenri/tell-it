@@ -11,6 +11,14 @@ $(() => {
             $(".content-container").removeClass("view-story-container");
             renderViewedStory(story, ".content-container", false);
           })
+          .then(() => {
+            $.get(`/stories/${story_id}/acceptedContributions`)
+            .then(data => {
+              data.map(data => {
+                $('.contributions-container').append(`<p>${data.content}</p>`)
+              })
+            })
+          })
           .catch((e) => console.log(e));
       })
       .catch((e) => console.log(e));

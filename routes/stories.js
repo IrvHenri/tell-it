@@ -67,13 +67,28 @@ module.exports = (db) => {
       .catch((err) => res.status(400).json(err));
   });
 
+  router.get('/:storyId/Unreviewedcontributions', (req, res) => {
+    db.query(`
+      SELECT contributions.*, users.username , users.avatar
+      FROM contributions
+      JOIN users ON users.id = contributions.user_id
+      WHERE story_id = $1
+      AND contributions.is_accepted = 'not reviewed'
+      ORDER BY created_at;
+    `,[req.params.story_id])
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => console.log(err));
+  })
+
   //Gets all accepted contributions for story, and orders by c
   router.get("/:story_id/acceptedContributions", (req, res) => {
     db.query(
       `
       SELECT * FROM contributions
       WHERE story_id = $1 AND is_accepted = 'accepted'
-      ORDER BY accepted_at;
+      ORDER BY accepted_at ASC;
     `,
       [req.params.story_id]
     )
@@ -98,7 +113,6 @@ module.exports = (db) => {
 
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
-    console.log("IN POST ROUTE");
     let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
     console.log(req.body);
     const { user_id, story_id, content } = req.body;

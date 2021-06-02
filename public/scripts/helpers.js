@@ -4,53 +4,54 @@ const escape = function (str) {
   return div.innerHTML;
 };
 const createViewedStory = (story, isAuthor) => {
-  const {
-    title,
-    avatar,
-    initial_content,
-    created_at,
-    username,
-    id,
-    is_complete,
-  } = story;
-  const safeTitle = escape(title);
-  const safeContent = escape(initial_content);
-  if (isAuthor) {
+    const {
+      title,
+      avatar,
+      initial_content,
+      created_at,
+      username,
+      id,
+      is_complete,
+    } = story;
+    const safeTitle = escape(title);
+    const safeContent = escape(initial_content);
+    if (isAuthor) {
+      const $story = $(`
+    <article class ='story-article' data-id= ${id}>
+    <header>
+    <h2>${safeTitle}</h2>
+
+     <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+    </header>
+
+    <p class ='story-content'> ${safeContent}</p>
+    <div class='contributions-container'>
+    </div>
+
+    <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
+        is_complete ? "Completed" : "In progress"
+      }</small></div> <button class = 'mark-complete-btn'>Mark Complete</button></footer>
+    </article>
+    `);
+      return $story;
+    }
     const $story = $(`
-  <article class ='story-article' data-id= ${id}>
-  <header>
-  <h2>${safeTitle}</h2>
+    <article class ='story-article' data-id= ${id}>
+    <header>
+    <h2>${safeTitle}</h2>
 
-   <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
-  </header>
+     <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
+    </header>
 
-  <p class ='story-content'> ${safeContent}</p>
-
-  <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
+    <p class ='story-content'> ${safeContent}</p>
+    <div class='contributions-container'>
+    </div>
+    <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
       is_complete ? "Completed" : "In progress"
-    }</small></div> <button class = 'mark-complete-btn'>Mark Complete</button></footer>
-  </article>
-
-  `);
+    }</small></div> </footer>
+    </article>
+    `);
     return $story;
-  }
-  const $story = $(`
-  <article class ='story-article' data-id= ${id}>
-  <header>
-  <h2>${safeTitle}</h2>
-
-   <div><h3> ${username}</h3> <img src = ${avatar} alt= 'avatar' class = 'avatar'> </div>
-  </header>
-
-  <p class ='story-content'> ${safeContent}</p>
-
-  <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
-    is_complete ? "Completed" : "In progress"
-  }</small></div> </footer>
-  </article>
-
-  `);
-  return $story;
 };
 
 const createStory = (story) => {
@@ -98,10 +99,10 @@ const randomColor = () => {
 };
 
 const creatAcceptContributionBtn = (id) => {
-  //${author_id == user_id ? creatAcceptContributionBtn(id) : ""}
-  return `
-  <button data-id = ${id}>
-   Accept <i class="fas fa-check-circle"></i>
+  return`
+  <button class='accept-contribution-btn' data-id = ${id}>
+    Accept
+    <i class="fas fa-check-circle"></i>
   </button>
   `;
 };
@@ -140,8 +141,15 @@ const renderStory = (story, tab) => {
 };
 
 const renderViewedStory = (story, tab, isAuthor) => {
+  //$.get(`/stories/${story.id}/acceptedContributions`)
   $(tab).append(createViewedStory(story, isAuthor));
 };
+
+// const renderAcceptedStories = (story) => {
+//   $.get(`/stories/${story.id}/acceptedContributions`)
+//   .then(data => console.log(data))
+//   //$('.contributions-container').append(data)
+// }
 
 const renderContributions = (contributions, tab, author_id) => {
   $(tab).empty();
@@ -164,6 +172,7 @@ const isAuthorView = (story, contributions, contributionWidget) => {
       ".contribution-container",
       story.user_id
     );
+    //renderAcceptedStories(story.id)
   } else {
     renderContributions(
       contributions,
@@ -171,5 +180,6 @@ const isAuthorView = (story, contributions, contributionWidget) => {
       story.user_id
     );
     renderViewedStory(story, ".content-container", false);
+    //renderAcceptedStories(story.id)
   }
 };
