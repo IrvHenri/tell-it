@@ -27,9 +27,9 @@ $(() => {
     $.modal.close();
     $.post("/stories", { user_id, title, initial_content })
       .then(() => {
+        loadHomePage();
         $(".create-story-form input").val("");
         $(".create-story-form textarea").val("");
-        loadHomePage;
       })
       .catch((err) => console.log(err));
   });

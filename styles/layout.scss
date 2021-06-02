@@ -63,7 +63,7 @@ button {
   min-width: 375px;
   max-width: 975px;
   margin: 0 auto;
-  margin-top: 13rem;
+  margin-top: 10rem;
 }
 .content-container {
   display: flex;
@@ -109,13 +109,14 @@ button {
     background: $user-stories-bg-color;
   }
   li {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 600;
     list-style: none;
     border-bottom: 0;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     padding: 0.2em 0.8em;
+    padding-top: 0.5em;
     &:hover {
       cursor: pointer;
     }

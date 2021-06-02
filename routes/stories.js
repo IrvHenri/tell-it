@@ -7,7 +7,9 @@ module.exports = (db) => {
     let query = `
     SELECT stories.* , users.avatar, users.username
     FROM stories
-    JOIN users ON stories.user_id = users.id;`;
+    JOIN users ON stories.user_id = users.id
+    ORDER BY created_at;
+    `;
     db.query(query)
       .then((data) => {
         const stories = data.rows;
@@ -58,11 +60,12 @@ module.exports = (db) => {
         SELECT * FROM users
         JOIN stories ON user_id = users.id
         WHERE stories.id = $1
-      `,[req.params.story_id]
+      `,
+      [req.params.story_id]
     )
-    .then(data => res.json(data.rows[0]))
-    .catch(err => res.status(400).json(err))
-  })
+      .then((data) => res.json(data.rows[0]))
+      .catch((err) => res.status(400).json(err));
+  });
 
   //Gets all accepted contributions for story, and orders by c
   router.get("/:story_id/acceptedContributions", (req, res) => {
@@ -95,7 +98,7 @@ module.exports = (db) => {
 
   // Form that submits contribution
   router.post("/:story_id/contribution", (req, res) => {
-    console.log("IN POST ROUTE")
+    console.log("IN POST ROUTE");
     let query = `INSERT INTO contributions (user_id, story_id, content) VALUES ($1, $2, $3) RETURNING *`;
     console.log(req.body);
     const { user_id, story_id, content } = req.body;
