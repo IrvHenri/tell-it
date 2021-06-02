@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 module.exports = (db) => {
   // GET homepage
   router.get("/", (req, res) => {
@@ -13,7 +12,6 @@ module.exports = (db) => {
     db.query(query)
       .then((data) => {
         const stories = data.rows;
-
         res.json({ stories });
       })
       .catch((err) => {
@@ -78,12 +76,12 @@ module.exports = (db) => {
       AND contributions.is_accepted = 'not reviewed'
       ORDER BY created_at;
     `,
-      [req.params.story_id]
+    [req.params.story_id]
     )
-      .then((data) => {
-        res.json(data.rows);
-      })
-      .catch((err) => console.log(err));
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => console.log(err));
   });
 
   //Gets all accepted contributions for story, and orders by c
@@ -145,7 +143,6 @@ module.exports = (db) => {
       WHERE id = $1;
       `,[story_id])
       .then(data => {
-        console.log(data.rows[0])
         if(data.rows[0].user_id === parseInt(user_id)){
           let query = "UPDATE stories SET is_complete = TRUE WHERE id = $1  ";
           let story_idToInt = Number(story_id);

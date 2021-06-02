@@ -30,43 +30,58 @@ module.exports = (db) => {
 
   //Author Accepts Contribution
   router.post('/:contribution_id', (req, res) => {
-    //Check if contribution's status is not_reviewed
-    db.query(`
-    SELECT id, story_id, is_accepted
-    FROM contributions
-    WHERE contributions.id = $1;
-    `,[req.params.contribution_id])
+    //Find Author ID
+    db.query(
+      `
+      SELECT stories.user_id as user_id
+      FROM contributions
+      JOIN stories ON story_id = stories.id
+      WHERE contributions.id = $1;
+      `,[req.params.contribution_id]
+    )
     .then(data => {
-      const {id, story_id, is_accepted} = data.rows[0]
-      if(is_accepted === 'not reviewed'){
+      if(data.rows[0].user_id === parseInt(req.body.user_id)){
+            //Check if contribution's status is not_reviewed
         db.query(`
-        UPDATE contributions
-        SET
-        is_accepted = CASE
-          WHEN
-            (contributions.id = $1
-            AND contributions.story_id = $2)
-            THEN 'accepted'
-          WHEN
-          (contributions.id <> $1
-            AND contributions.story_id = $2
-            AND is_accepted <> 'accepted') THEN 'rejected'
-          ELSE is_accepted
-        END,
-        accepted_at = CASE
-          WHEN (contributions.id = $1 AND contributions.story_id = $2) THEN NOW()
-          ELSE accepted_at
-        END
-        RETURNING *;
-        `,[id, story_id])
+        SELECT id, story_id, is_accepted
+        FROM contributions
+        WHERE contributions.id = $1;
+        `,[req.params.contribution_id])
         .then(data => {
-          res.json(data.rows)
-        })
-      } else {
+          const {id, story_id, is_accepted} = data.rows[0]
+          if(is_accepted === 'not reviewed'){
+            db.query(`
+            UPDATE contributions
+            SET
+            is_accepted = CASE
+              WHEN
+                (contributions.id = $1
+                AND contributions.story_id = $2)
+                THEN 'accepted'
+              WHEN
+              (contributions.id <> $1
+                AND contributions.story_id = $2
+                AND is_accepted <> 'accepted') THEN 'rejected'
+              ELSE is_accepted
+            END,
+            accepted_at = CASE
+              WHEN (contributions.id = $1 AND contributions.story_id = $2) THEN NOW()
+              ELSE accepted_at
+            END
+            RETURNING *;
+            `,[id, story_id])
+            .then(data => {
+              res.json(data.rows)
+            })
+        } else {
         res.status(400).json({error: "ERROR: This contribution has already been reviewed"})
       }
     })
     .catch(err => console.log(err))
+      } else {
+          res.status(403).json({error: "Users may only accept contributions to their own stories."})
+        }
+    })
   })
 
   //Upvote Contribution

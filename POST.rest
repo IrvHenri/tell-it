@@ -1,8 +1,0 @@
-POST http://localhost:8080/stories/1/contribution HTTP/1.1
-content-type: application/json
-
-{
-  "user_it": 1,
-  "story_id": 1,
-  "content": "BRAND sPANKING NEW POST MASTER OVER HERE"
-}
