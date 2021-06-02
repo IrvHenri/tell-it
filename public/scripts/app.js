@@ -24,8 +24,9 @@ $(() => {
     const title = $("#title").val();
     const initial_content = $("#initial_content").val();
     const user_id = localStorage.getItem("user_id");
+    const created_at = new Date().toISOString();
     $.modal.close();
-    $.post("/stories", { user_id, title, initial_content })
+    $.post("/stories", { user_id, title, initial_content, created_at })
       .then(() => {
         loadHomePage();
         $(".create-story-form input").val("");
