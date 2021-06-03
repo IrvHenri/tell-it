@@ -70,6 +70,8 @@ button {
     Layout
 ================ */
 
+/// App Containers
+
 .app-container {
   width: 75%;
   min-width: 375px;
@@ -137,7 +139,7 @@ button {
   background: $user-stories-bg-color;
 }
 
-// Main Tab headers
+/// Tabs
 
 .nav-tabs {
   display: flex;
@@ -200,14 +202,15 @@ button {
   }
 }
 
-// Home-tab
+// Create Story button & form
+
 .create-story-btn {
   display: flex;
   position: fixed;
   justify-content: center;
   align-items: center;
-  bottom: 45px;
-  right: 180px;
+  bottom: 60px;
+  right: 200px;
   z-index: 99;
   background: $story-page-bg-color;
   color: #fff;
@@ -332,7 +335,7 @@ button {
   margin-top: 3em;
 }
 
-// Story Tab
+// Viewed Story view
 
 .contribution-widget {
   background: $story-page-bg-color;
@@ -455,8 +458,8 @@ button {
 .jump-btn {
   display: none;
   position: fixed;
-  bottom: 45px;
-  right: 60px;
+  bottom: 145px;
+  right: 200px;
   z-index: 99;
   background: #ff0000;
   color: #fff;
@@ -475,17 +478,10 @@ button {
 }
 
 @media screen and (max-width: 1100px) {
-  .jump-btn {
-    bottom: 140px;
-    right: 60px;
-  }
-  .create-story-btn {
-    bottom: 60px;
-    right: 60px;
-  }
   .create-story-btn,
   .jump-btn {
     opacity: 0.5;
+    right: 60px;
 
     &:hover {
       opacity: 1;
