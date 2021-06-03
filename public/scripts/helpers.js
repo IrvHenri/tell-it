@@ -101,10 +101,15 @@ const createContribution = (contribution, author_id) => {
   const { id, avatar, content, created_at, username, upvotes } = contribution;
   const user_id = localStorage.getItem("user_id");
   const $contribution = $(`<article class='contribution'>
-  <h5>Upvotes:
-  <span class='upvote-count'>${upvotes}</span>
-  </h5>
-  <header> <div><img  src = ${avatar} alt = 'avatar' class = 'avatar'><p>${username}</p>  </div></header>
+  <header>
+    <h5>Upvotes:
+      <span class='upvote-count'>${upvotes}</span>
+    </h5>
+    <div>
+      <img src = ${avatar} alt = 'avatar' class = 'avatar'>
+      <p>${username}</p>
+    </div>
+  </header>
   <p>${content}</p>
   <footer>
    <small> ${timeago.format(created_at)} </small>
