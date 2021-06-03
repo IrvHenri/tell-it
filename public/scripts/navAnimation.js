@@ -1,10 +1,8 @@
 $(document).ready(() => {
   const scrollFunction = () => {
-    if ($(document).scrollTop() > 75) {
-      $("nav").slideUp(500);
+    if ($(".content-container").scrollTop() > 75) {
       $(".jump-btn").show();
     } else {
-      $("nav").slideDown();
       $(".jump-btn").hide();
     }
   };
@@ -13,10 +11,10 @@ $(document).ready(() => {
     jumpToTop();
   });
   const jumpToTop = () => {
-    $(document).scrollTop(0);
+    $(".content-container").scrollTop(0);
   };
 
-  $(window).scroll(() => {
+  $(".content-container").scroll(() => {
     scrollFunction();
   });
 });
