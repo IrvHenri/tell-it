@@ -12,7 +12,7 @@ $(() => {
       user_id,
       story_id,
       content,
-      created_at,
+      created_at
     })
       .then(() => {
         reRender(story_id);

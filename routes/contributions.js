@@ -89,6 +89,7 @@ module.exports = (db) => {
   router.post('/:contribution_id/upvote', (req, res) => {
     //Check if the user upvoting has already upvoted this post
     const userId = req.body.user_id;
+    !userId && res.status(403).json({error: "invalid user"})
     db.query(`
     SELECT * FROM upvotes
     WHERE contribution_id = $1

@@ -28,7 +28,7 @@ $(() => {
     $.modal.close();
     $.post("/stories", { user_id, title, initial_content, created_at })
       .then(() => {
-        loadHomePage();
+        location.reload()
         $(".create-story-form input").val("");
         $(".create-story-form textarea").val("");
       })
