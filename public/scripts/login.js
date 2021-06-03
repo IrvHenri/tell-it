@@ -17,7 +17,7 @@ const renderLoginForm = () => {
 }
 
 const login = (loginVal) => {
-  $(".user-login #login-error").remove()
+  $(".user-login #error-msg").remove()
   $.post('/users/login', {loginVal})
   .then(data => {
     localStorage.setItem('user_id', data.id);
@@ -25,7 +25,7 @@ const login = (loginVal) => {
     location.reload()
   })
   .catch(err => {
-    $(".user-login").prepend(`<p id='login-error'>ERROR: Please try again</p>`)
+    $(".user-login").prepend(`<p id='error-msg'>ERROR: Please try again</p>`)
   })
 }
 

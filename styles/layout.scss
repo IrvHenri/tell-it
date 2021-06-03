@@ -50,6 +50,12 @@ button {
   }
 }
 
+#error-msg {
+  color: #F55;
+  padding-right: 1em;
+  text-align: center;
+}
+
 /* =============
     Typography
 ================ */
@@ -411,6 +417,10 @@ button {
       }
     }
   }
+}
+
+.submit-contribution{
+  margin-bottom: 0.5em;
 }
 
 .added-contribution {
