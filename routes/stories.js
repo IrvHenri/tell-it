@@ -66,24 +66,6 @@ module.exports = (db) => {
       .catch((err) => res.status(400).json(err));
   });
 
-  router.get("/:storyId/Unreviewedcontributions", (req, res) => {
-    db.query(
-      `
-      SELECT contributions.*, users.username , users.avatar
-      FROM contributions
-      JOIN users ON users.id = contributions.user_id
-      WHERE story_id = $1
-      AND contributions.is_accepted = 'not reviewed'
-      ORDER BY created_at;
-    `,
-      [req.params.story_id]
-    )
-      .then((data) => {
-        res.json(data.rows);
-      })
-      .catch((err) => console.log(err));
-  });
-
   //Gets all accepted contributions for story, and orders by c
   router.get("/:story_id/acceptedContributions", (req, res) => {
     db.query(
@@ -100,6 +82,7 @@ module.exports = (db) => {
       .catch((err) => console.log(err));
   });
 
+  //Submit New Story
   router.post("/", (req, res) => {
     const { title, initial_content, user_id, created_at } = req.body;
     let query = `INSERT INTO stories (user_id, title,initial_content,created_at) VALUES ($1, $2 , $3, $4) RETURNING *`;
@@ -117,6 +100,9 @@ module.exports = (db) => {
   router.post("/:story_id/contribution", (req, res) => {
     let query = `INSERT INTO contributions (user_id, story_id, content, created_at) VALUES ($1, $2, $3, $4) RETURNING *`;
     const { user_id, story_id, content, created_at } = req.body;
+    if(!user_id) {
+      return res.status(403).json({ error: "User must be logged in to submit a contribution." })
+    }
     let values = [user_id, story_id, content, created_at];
     if (content) {
       db.query(query, values)

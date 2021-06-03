@@ -1,8 +1,9 @@
 const renderLoginForm = () => {
   const uid = localStorage.getItem('user_id')
+  const username = localStorage.getItem('user_name');
   if(uid){
     $('.user-login').html(`
-    <p>Welcome! ${uid}</p>
+    <p>Welcome ${username}!</p>
     <button class='logout'>Logout</button>
   `)
   } else {
@@ -20,6 +21,7 @@ const login = (loginVal) => {
   $.post('/users/login', {loginVal})
   .then(data => {
     localStorage.setItem('user_id', data.id);
+    localStorage.setItem('user_name', data.username);
     location.reload()
   })
   .catch(err => {

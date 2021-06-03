@@ -22,13 +22,13 @@ $(() => {
           //If user doesn't have stories, render something else
           if (stories.length === 0) {
             $(".content-container").prepend(`
-          <div class='user-stories-fail'>
-            <h1>Uh Oh</h1>
-            <h2>You haven't written any stories!</h2>
-            <a href="#ex1" rel="modal:open">
-              <button>Write a story!</button>
-            </a>
-          </div>`);
+              <div class='user-stories-fail'>
+                <h1>Uh Oh</h1>
+                <h2>You haven't written any stories!</h2>
+                <a href="#ex1" rel="modal:open">
+                  <button>Write a story!</button>
+                </a>
+              </div>`);
           } else {
             renderStories(stories, ".content-container");
           }
