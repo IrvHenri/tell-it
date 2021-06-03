@@ -51,7 +51,7 @@ button {
 }
 
 #error-msg {
-  color: #F55;
+  color: #f55;
   padding-right: 1em;
   text-align: center;
 }
@@ -196,8 +196,10 @@ button {
 
 // Home-tab
 .create-story-btn {
-  display: block;
+  display: flex;
   position: fixed;
+  justify-content: center;
+  align-items: center;
   bottom: 45px;
   right: 180px;
   z-index: 99;
@@ -208,6 +210,7 @@ button {
   height: 70px;
   border-radius: 50%;
   transition: 200ms ease-in;
+  text-decoration: none;
   &:hover {
     background: darken($story-page-bg-color, 5%);
     cursor: pointer;
@@ -419,7 +422,7 @@ button {
   }
 }
 
-.submit-contribution{
+.submit-contribution {
   margin-bottom: 0.5em;
 }
 
@@ -484,12 +487,11 @@ button {
   }
 }
 
-
 //User Stories Tab
 .content-container .user-stories-fail {
   text-align: center;
 
-  button{
+  button {
     height: 2em;
     width: 100%;
     color: #555;
