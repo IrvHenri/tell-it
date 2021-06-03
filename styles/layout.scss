@@ -78,6 +78,7 @@ button {
   box-shadow: $box-shadow;
   padding: 2em;
   overflow: scroll;
+  transition: 150ms ease-in;
 }
 
 .view-story-container {
@@ -86,6 +87,7 @@ button {
   align-items: flex-start;
   justify-content: space-between;
   padding: 2em;
+  transition: 200ms ease-in;
   .story-article {
     margin-top: 0;
     width: 50%;
@@ -119,6 +121,7 @@ button {
   }
 }
 .view-user-page {
+  transition: 150ms ease-in;
   background: $user-stories-bg-color;
 }
 
@@ -262,6 +265,7 @@ button {
   border-radius: 5px;
   margin-top: 2em;
   padding: 1.5em;
+
   header {
     display: flex;
     justify-content: space-between;
@@ -291,6 +295,20 @@ button {
     justify-content: space-between;
     align-items: center;
     margin-top: 1em;
+  }
+}
+
+.story-animation {
+  animation: slide-up 0.4s ease;
+}
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -335,6 +353,7 @@ button {
   padding: 1.5em;
   padding: 1em;
   transition: 200ms ease-in;
+  animation: fade-in 0.3s ease-in;
   &:hover {
     box-shadow: $box-shadow;
   }
@@ -390,6 +409,26 @@ button {
         transform: scale(1.2);
       }
     }
+  }
+}
+
+.added-contribution {
+  animation: fade-in 0.4s ease;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

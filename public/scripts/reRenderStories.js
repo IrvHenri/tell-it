@@ -10,23 +10,22 @@ const renderContributionWidget = (story_id) => {
     </div>
   </div>
   `);
-}
+};
 
 const reRender = (story_id) => {
   const $contributionWidget = renderContributionWidget(story_id);
   $(".content-container").empty();
   $.get(`/stories/${story_id}`)
     .then((data) => {
-      const { story, contributions } = data
+      const { story, contributions } = data;
       isAuthorView(story, contributions, $contributionWidget);
     })
     .then(() => {
-      $.get(`/stories/${story_id}/acceptedContributions`)
-      .then(data => {
-        data.map(data => {
-          $('.contributions-container').append(`<p>${data.content}</p>`)
-        })
-      })
+      $.get(`/stories/${story_id}/acceptedContributions`).then((data) => {
+        data.map((data) => {
+          $(".contributions-container").append(`<p>${data.content}</p>`);
+        });
+      });
     })
     .catch((err) => console.log(err));
-}
+};

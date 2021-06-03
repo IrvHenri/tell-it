@@ -82,7 +82,7 @@ const createStory = (story) => {
   </article>
 
   `);
-  return $story;
+  return $story.addClass("story-animation");
 };
 
 const randomColor = () => {

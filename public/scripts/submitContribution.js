@@ -6,6 +6,7 @@ $(() => {
       .closest(".content-container")
       .children(".story-article")
       .attr("data-id");
+
     const created_at = new Date().toISOString();
     $.post(`/stories/${story_id}/contribution`, {
       user_id,
