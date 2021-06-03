@@ -23,7 +23,7 @@ const login = (loginVal) => {
     location.reload()
   })
   .catch(err => {
-    $(".user-login").prepend(`<p class='login-error'>ERROR: INCORRECT CREDENTIALS</p>`)
+    $(".user-login").prepend(`<p id='login-error'>ERROR: Please try again</p>`)
   })
 }
 

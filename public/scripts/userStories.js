@@ -11,7 +11,7 @@ $(() => {
     const currUserId = localStorage.getItem("user_id");
     if (!currUserId) {
       $(".content-container").prepend(`
-          <div>
+          <div class='user-stories-fail'>
             <h1>Looks like you aren't logged in :( </h1>
             <h2>Sign up to write your own stories!</h2>
           </div>`);
@@ -22,9 +22,12 @@ $(() => {
           //If user doesn't have stories, render something else
           if (stories.length === 0) {
             $(".content-container").prepend(`
-          <div>
+          <div class='user-stories-fail'>
             <h1>Uh Oh</h1>
-            <h2>This user has no stories!</h2>
+            <h2>You haven't written any stories!</h2>
+            <a href="#ex1" rel="modal:open">
+              <button>Write a story!</button>
+            </a>
           </div>`);
           } else {
             renderStories(stories, ".content-container");

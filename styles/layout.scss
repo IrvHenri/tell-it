@@ -433,3 +433,15 @@ button {
     }
   }
 }
+
+
+//User Stories Tab
+.content-container .user-stories-fail {
+  text-align: center;
+
+  button{
+    height: 2em;
+    width: 100%;
+    color: #555;
+  }
+}

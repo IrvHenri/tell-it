@@ -2,19 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
   router.post('/login', (req, res) => {
     db.query(`
     SELECT * FROM users
@@ -30,25 +17,6 @@ module.exports = (db) => {
     })
     .catch(err => {
       res.status(500).json(err)
-    })
-  })
-
-  router.get("/:id", (req, res) => {
-    db.query(`
-    SELECT * FROM users WHERE id = $1;
-    `,[req.params.id])
-    .then(data => {
-      const user = data.rows[0]
-      if(user){
-        res.json(user)
-      } else {
-        res.status(400).json("Error. User does not exist!")
-      }
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message})
     })
   })
 
