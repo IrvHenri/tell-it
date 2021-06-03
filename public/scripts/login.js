@@ -17,7 +17,7 @@ const renderLoginForm = () => {
 }
 
 const login = (loginVal) => {
-  $(".user-login .login-error").remove()
+  $(".user-login #login-error").remove()
   $.post('/users/login', {loginVal})
   .then(data => {
     localStorage.setItem('user_id', data.id);

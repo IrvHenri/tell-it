@@ -11,46 +11,36 @@ const createViewedStory = (story, isAuthor) => {
     created_at,
     username,
     id,
-    is_complete,
+    is_complete
   } = story;
   const safeTitle = escape(title);
   const safeContent = escape(initial_content);
+  let $story = $(`
+    <article class ='story-article' data-id= ${id}>
+    <header>
+      <h2>${safeTitle}</h2>
+      <div>
+        <img src = ${avatar} alt= 'avatar' class = 'avatar'>
+        <h3> ${username}</h3>
+      </div>
+    </header>
+    <p class ='story-content'> ${safeContent}</p>
+    <div class='contributions-container'></div>
+    <footer>
+      <div>
+        <small>${timeago.format(created_at)} </small>
+        /
+        <small>${is_complete ? "Completed" : "In progress"}
+        </small>
+      </div>
+    </footer>
+    </article>
+  `)
   if (isAuthor) {
-    const $story = $(`
-    <article class ='story-article' data-id= ${id}>
-    <header>
-    <h2>${safeTitle}</h2>
-
-     <div><img src = ${avatar} alt= 'avatar' class = 'avatar'><h3> ${username}</h3> </div>
-    </header>
-
-    <p class ='story-content'> ${safeContent}</p>
-    <div class='contributions-container'>
-    </div>
-
-    <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
-      is_complete ? "Completed" : "In progress"
-    }</small></div> <button class = 'mark-complete-btn'>Mark Complete</button></footer>
-    </article>
-    `);
-    return $story;
+    $story
+    .children('footer')
+    .append(`<button class = 'mark-complete-btn'>Mark Complete</button>`);
   }
-  const $story = $(`
-    <article class ='story-article' data-id= ${id}>
-    <header>
-    <h2>${safeTitle}</h2>
-
-     <div> <img src = ${avatar} alt= 'avatar' class = 'avatar'><h3> ${username}</h3> </div>
-    </header>
-
-    <p class ='story-content'> ${safeContent}</p>
-    <div class='contributions-container'>
-    </div>
-    <footer> <div><small>${timeago.format(created_at)} </small>/ <small>${
-    is_complete ? "Completed" : "In progress"
-  }</small></div> </footer>
-    </article>
-    `);
   return $story;
 };
 
@@ -92,7 +82,7 @@ const randomColor = () => {
     "#639fb0",
     "#047cac",
     "#9ad2a9",
-    "#f5f5f5",
+    "#f5f5f5"
   ];
   let randomNum = Math.floor(Math.random() * 5) + 1;
   return colors[randomNum];
