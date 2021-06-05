@@ -1,4 +1,49 @@
-# Project Setup
+# Tell-it!
+
+Tell-it! is a story creator app that is a cross between twitter and reddit. Tell-it! was a midterm project at Lighthouse labs. Contributors were Zoheb Boga & Irving Henriquez.
+
+## Features
+
+ - users can start a story
+ - users can add contributions to an existing story
+ - users can upvote a contribution
+ - users can see upvotes of a contribution
+ - the creator of a story can accept a contribution; this merges it to the rest of the story
+ - the creator of a story can mark the story complete
+
+### Preview 
+
+#### Homepage
+<img width="604" alt="tell-it mobile" src="https://user-images.githubusercontent.com/69181038/120903829-6f129100-c616-11eb-9d89-c82d2e116d41.png">
+
+
+#### Contribute to a Story
+<img width="604" alt="tell-it mobile" src="https://user-images.githubusercontent.com/69181038/120903817-5b672a80-c616-11eb-9333-6ffb75c503eb.png">
+
+#### Accept & merge a contribution to the story
+<img width="604" alt="tell-it mobile" src="https://user-images.githubusercontent.com/69181038/120903799-3f638900-c616-11eb-9ffd-aa24e6284dee.png">
+
+
+#### Mark story as complete
+<img width="604" alt="tell-it mobile" src="https://user-images.githubusercontent.com/69181038/120903775-222eba80-c616-11eb-8e81-67d55c00670f.png">
+
+#### Mobile view (575px breakpoint)
+<img width="304" alt="tell-it mobile" src="https://user-images.githubusercontent.com/69181038/120903753-fc091a80-c615-11eb-8e97-a3ba0dc6f99b.png">
+
+## Tech Stack
+
+- Jquery
+- Express
+- Node-Postgres
+- Sass
+
+
+## Dependencies
+
+- Node 10.x or above
+- NPM 5.x or above
+- PG 6.x
+## Project Setup
 <details>
   <summary>Click to expand!</summary>
   
