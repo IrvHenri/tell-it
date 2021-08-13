@@ -13,6 +13,9 @@ Tell-it! is a story creator app that is a cross between twitter and reddit. Tell
 
 ### Preview 
 
+### Live Demo ( Tester Profile- Username: Bob & Password: Bob)
+ [Tellit-it!](https://quiet-earth-87946.herokuapp.com/)
+
 #### Homepage
 <img width="604" alt="tell-it mobile" src="https://user-images.githubusercontent.com/69181038/120903829-6f129100-c616-11eb-9d89-c82d2e116d41.png">
 
