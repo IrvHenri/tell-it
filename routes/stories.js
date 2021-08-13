@@ -32,6 +32,7 @@ module.exports = (db) => {
     )
       .then((data) => {
         retObj.story = data.rows[0];
+        //you just want to get contributions that weren't accepted.
         db.query(
           `
           SELECT contributions.*, users.username , users.avatar
@@ -45,6 +46,7 @@ module.exports = (db) => {
         )
           .then((data) => {
             retObj.contributions = data.rows;
+            console.log("Contributions:", retObj.contributions);
             res.json(retObj);
           })
           .catch((err) => console.log(err));
@@ -53,18 +55,18 @@ module.exports = (db) => {
   });
 
   //Route that gets author by storyID
-  router.get("/:story_id/author", (req, res) => {
-    db.query(
-      `
-        SELECT * FROM users
-        JOIN stories ON user_id = users.id
-        WHERE stories.id = $1
-      `,
-      [req.params.story_id]
-    )
-      .then((data) => res.json(data.rows[0]))
-      .catch((err) => res.status(400).json(err));
-  });
+  // router.get("/:story_id/author", (req, res) => {
+  //   db.query(
+  //     `
+  //       SELECT * FROM users
+  //       JOIN stories ON user_id = users.id
+  //       WHERE stories.id = $1
+  //     `,
+  //     [req.params.story_id]
+  //   )
+  //     .then((data) => res.json(data.rows[0]))
+  //     .catch((err) => res.status(400).json(err));
+  // });
 
   //Gets all accepted contributions for story, and orders by c
   router.get("/:story_id/acceptedContributions", (req, res) => {
@@ -100,8 +102,10 @@ module.exports = (db) => {
   router.post("/:story_id/contribution", (req, res) => {
     let query = `INSERT INTO contributions (user_id, story_id, content, created_at) VALUES ($1, $2, $3, $4) RETURNING *`;
     const { user_id, story_id, content, created_at } = req.body;
-    if(!user_id) {
-      return res.status(403).json({ error: "User must be logged in to submit a contribution." })
+    if (!user_id) {
+      return res
+        .status(403)
+        .json({ error: "User must be logged in to submit a contribution." });
     }
     let values = [user_id, story_id, content, created_at];
     if (content) {
@@ -135,11 +139,9 @@ module.exports = (db) => {
           })
           .catch((err) => res.status(500).json({ error: err.message }));
       } else {
-        res
-          .status(403)
-          .json({
-            error: "Users may only mark their own stories as complete.",
-          });
+        res.status(403).json({
+          error: "Users may only mark their own stories as complete.",
+        });
       }
     });
   });

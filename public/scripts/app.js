@@ -6,6 +6,7 @@ $(() => {
     $.get("/stories")
       .then((data) => {
         let stories = data.stories;
+
         renderStories(stories, ".content-container");
       })
       .catch((err) => console.log(err));
@@ -28,7 +29,7 @@ $(() => {
     $.modal.close();
     $.post("/stories", { user_id, title, initial_content, created_at })
       .then(() => {
-        location.reload()
+        location.reload();
         $(".create-story-form input").val("");
         $(".create-story-form textarea").val("");
       })
